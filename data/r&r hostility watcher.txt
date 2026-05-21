@@ -1,0 +1,9 @@
+mission "R&R Pirate Reputation Monitor"
+	invisible
+	job
+	repeat
+	to offer
+		"reputation: Pirate" >= 100
+		"reputation: R&R Stranded Ships Operations" >= 0
+	on offer
+		"reputation: R&R Stranded Ships Operations" = -10

@@ -1,0 +1,38 @@
+phrase "R&R Ops"
+	word
+		"R&R Ops Alpha"
+		"R&R Ops Beta"
+		"R&R Ops Gamma"
+
+phrase "R&R Recon %i"
+	word
+		"R&R Recon Alpha"
+		"R&R Recon Beta"
+		"R&R Recon Gamma"
+		"R&R Recon Delta"
+
+phrase "R&R Heavy %i"
+	word
+		"R&R Heavy Vanguard"
+		"R&R Heavy Bulwark"
+		"R&R Heavy Bastion"
+		"R&R Heavy Aegis"
+
+phrase "rr_ops_unauthorized"
+	word
+		"This is R&R Ops patrol. We copy you on common human frequencies."
+		"Greetings, pilot. Our automated systems are restricted to encrypted corporate channels."
+
+phrase "rr_ops_authorized"
+	word
+		"R&R Ops channels established. Encryption keys verified. Standing by to assist."
+		"This is R&R Ops patrol. Logistics connection secure. Channels are open."
+
+phrase "rr_ops_provoked"
+	word
+		"Hostile actions detected. R&R Ops engaging targets."
+		"You have fired upon R&R corporate assets. Deadly force authorized."
+
+government "R&R Stranded Ships Operations"
+	"friendly hail" "rr_ops_authorized"
+	"hostile hail" "rr_ops_provoked"

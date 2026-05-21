@@ -1,0 +1,46 @@
+mission "R&R Hard-Tier Emergency"
+	invisible
+	to offer
+		"rr_hard_tier_unlocked" == 0
+		"rr_mid_tier_unlocked" == 1
+		or
+			and
+				"rr_operations_jobs_done" >= 50
+				"combat rating" >= 100
+			"rr_operations_jobs_done" >= 100
+	on offer
+		conversation
+			"Dana's face is pale and frantic. She says she wishes she could offer you a drink, but there is no time. A prototype tech leak just hit the outer rim, and if that core falls into the wrong hands, they will dismantle the entire R&R infrastructure. You are the only one close enough to reach it before they do, and she begs you to move now."
+			choice
+				"Understood. Jumping to the coordinates."
+					accept
+				"I... need to prepare."
+					decline
+	on accept
+		"rr_hard_tier_started" = 1
+	passengers 40 20 1
+	destination <origin>
+	waypoint 
+		distance 8 13
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Burning Fleet Flagship"
+		on board
+			conversation
+				"Grab it! The stability is failing—if this goes critical, this whole system is going to be vaporized!"
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"Thank God... you've saved us all. I've authorized your highest level of clearance. Good luck out there."
+		"rr_hard_tier_unlocked" = 1
+		"rr_operations_jobs_done" ++
+		payment 350000

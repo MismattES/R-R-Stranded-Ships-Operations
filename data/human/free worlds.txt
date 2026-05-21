@@ -1,0 +1,238 @@
+#Free Worlds jobs
+#Easy ones
+
+mission "Recovery Standard Free Worlds Asset"
+	name "Salvage Free Worlds Frontier Mineral Cache in <waypoints>"
+	description "A local mining courier carrying a heavy load of 'Refined Hyper-Density Magnetite' has been stranded in the <waypoints> system."
+	repeat
+	source
+		government "Free Worlds"
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Bounder" "Battered Frontier Miner"
+		on board
+			conversation
+				"Your crew winches the dense heavy containment crate into your primary loading bay. The deckhands yell that the cargo is secure but the structural framework is buckling from the shifting weight and urge you to clear the docking clamps."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You touch down at <origin>. Local factory builders eagerly offload the critical raw manufacturing minerals and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The Free Worlds Council laments the loss of critical war production metals to regional marauders."
+		"reputation: Free Worlds" -= 0.15
+
+mission "Rescue Stranded Free Worlds Militia"
+	name "Rescue Stranded Militia in <waypoints>"
+	description "Board the disabled Free Worlds vessel stranded in the <waypoints> system. Transfer the <bunks> passengers to your ship, then bring them back here to <origin>."
+	repeat
+	source
+		government "Free Worlds"
+	passengers 10 5 1
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Bounder" "Battered Militia Scout"
+		on board
+			conversation
+				"Militia members scramble through the airlock into your bunks. The pilot yells to get out of there as scanners are picking up incoming signatures."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. The militia members disembark thanking you for the save and your bunks are now clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The Free Worlds Council condemns your failure to save the stranded militia crew."
+		"reputation: Free Worlds" -= 0.15
+
+#Mid ones
+
+mission "Recovery Military Free Worlds Asset"
+	name "Secure Free Worlds Fission Core in <waypoints>"
+	description "A Free Worlds supply runner carrying a highly volatile 'Unstable Fission Core Component' has been disabled in the <waypoints> system."
+	repeat
+	source
+		government "Free Worlds"
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Bastion" "Damaged Militia Blockade Runner"
+		on board
+			conversation
+				"Your engineers winch the glowing reactor part aboard. The chief engineer calls out that the fission component is loaded warning that radiation spikes are destabilizing the derelict and a Pirate Fleet just warped in on your position."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You touch down at <origin>. Militia mechanics hurriedly load the unstable component onto a heavily shielded transport vehicle."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The Free Worlds High Council officially revokes your standing for abandoning vital military hardware."
+		"reputation: Free Worlds" -= 0.20
+
+mission "Rescue Military Free Worlds Militia"
+	name "Extract Free Worlds Elite Guard from <waypoints>"
+	description "A central flagship escort unit has been disabled by a heavy offensive line in the <waypoints> system."
+	repeat
+	source
+		government "Free Worlds"
+	passengers 20 10 1
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Bastion" "Crippled Militia Command Hull"
+		on board
+			conversation
+				"Battle-worn Free Worlds soldiers carrying heavy tactical gear secure themselves in your hold. They warn that tracking profiles are locking in and scavengers want the ship's weapons systems urging you to break docking clamps now."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You touch down at <origin>. Crowds gather along the spaceport decks cheering as the veterans safely disembark and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The Free Worlds Council issues a formal decree of severe military failure."
+		"reputation: Free Worlds" -= 0.25
+
+#Hard ones
+
+mission "Recovery Endgame Free Worlds Crystals"
+	name "CRITICAL: Salvage Free Worlds Plasma Cache in <waypoints>"
+	description "A Free Worlds heavy dreadnought transporting a 'Crate of Unrefined Plasma Crystals' has been crippled in the <waypoints> system."
+	source
+		government "Free Worlds"
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Crippled Free Worlds Dreadnought"
+		on board
+			conversation
+				"Your crew successfully extracts the massive highly volatile crystal crate. The deck chief yells that the plasma crystals are secured but the dreadnought's core is giving way urging you to disengage as heavy raider warships and swarms of fast interceptors drop directly out of hyperspace on your coordinate tracks."
+			"fw_endgame_salvage" = 1
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You arrive safely at <origin>. Free Worlds military forces quickly secure the raw power source for their war efforts and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The Free Worlds Council views you with absolute contempt for losing enough plasma crystals to power a small fleet."
+		"reputation: Free Worlds" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30
+
+mission "Rescue Endgame Free Worlds Militia"
+	name "CRITICAL: Evacuate Militia Generals in <waypoints>"
+	description "A Free Worlds dreadnought acting as a mobile command base is collapsing in the <waypoints> system."
+	source
+		government "Free Worlds"
+	passengers 40 20 1
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Crippled Free Worlds Dreadnought"
+		on board
+			conversation
+				"The main airlock groans under the stress as dozens of wounded militia staff pour onto your decks. A General orders you to get clear explaining that the defensive line just folded and interceptors are dropping out of hyperspace right on your tail."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You safely navigate down to <origin>. Cheering militia troops surround your ship as the commanders are rushed to the medical center and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Free Worlds" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The Free Worlds Council revokes your standing because allowing the command structure to perish in hostile space is unforgivable."
+		"reputation: Free Worlds" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30

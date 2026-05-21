@@ -1,0 +1,44 @@
+mission "R&R Mid-Tier Invitation"
+	invisible
+	to offer
+		"rr_mid_tier_unlocked" == 0
+		"rr_mid_tier_started" == 0
+		or
+			and
+				"rr_operations_jobs_done" >= 20
+				"combat rating" >= 40
+			"rr_operations_jobs_done" >= 40
+	on offer
+		conversation
+			"Dana's face appears on your terminal. She tells you she has been tracking your work, and you are ready for more. She has a critical rescue operation in the <waypoints> system, and if you pull it off, she will clear you for all of their high-priority contracts."
+			choice
+				"Send the coordinates. I'm on my way."
+					accept
+				"Not right now."
+					decline
+	on accept
+		"rr_mid_tier_started" = 1
+	passengers 20 10 1
+	destination <origin>
+	waypoint 
+		distance 4 9
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Falcon" "Damaged R&R Ops Recovery Hull"
+		on board
+			conversation
+				"You're the extraction unit? Good, we've got heavy hostiles on our tail!"
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"Excellent work. You've proven you can handle the heat. I'm updating your clearance level now."
+		"rr_mid_tier_unlocked" = 1
+		"rr_operations_jobs_done" ++
+		payment 100000

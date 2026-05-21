@@ -1,0 +1,2 @@
+name "R&R Stranded Ships Operations"
+about "Plugin that adds a new organization and rescue/recovery jobs from it"

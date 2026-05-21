@@ -1,0 +1,238 @@
+# Deep Recovery and Rescue Jobs
+# Easy ones
+
+mission "Recovery Standard Deep Asset"
+	name "Secure Deep Security Sensor Core in <waypoints>"
+	description "A long-range deep automated sweep drone carrying an 'Encrypted Deep-Space Scan Log' has lost power in the <waypoints> system."
+	repeat
+	source
+		attributes "The Deep"
+	destination <origin>
+	waypoint
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Classified Deep Wreck"
+		on board
+			conversation
+				"Your system techs cut into the primary command node, pulling the black-box data tape. The tech reports the telemetry log is secured, but the drone's anti-tamper security grid has spiked the battery cells and it is going up."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. Deep Intelligence agents take custody of the drive under strict radio silence curtains and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"Deep Security Intelligence places a secure administrative lockdown black mark across your spacer pilot file."
+		"reputation: Deep Security" -= 0.15
+
+mission "Rescue Stranded Deep Security Agents"
+	name "Rescue Stranded Deep Agents in <waypoints>"
+	description "Board the classified Deep Security vessel stranded in the <waypoints> system. Transfer the <bunks> agents to your ship, then bring them back here to <origin>."
+	repeat
+	source
+		attributes "The Deep"
+	passengers 10 5 1
+	destination <origin>
+	waypoint
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Classified Deep Wreck"
+		on board
+			conversation
+				"Agents silently file through the airlock into your bunks. The lead agent quietly commands an emergency burn because the wreck's anti-tamper explosives are primed."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. The agents disembark under cover of heavy security escorts and your bunks are now clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"Deep Security Intelligence logs a massive failure on your record for the loss of their undercover agents."
+		"reputation: Deep Security" -= 0.15
+
+# Mid ones
+
+mission "Recovery Military Deep Security Asset"
+	name "Retrieve Deep Security Black Box in <waypoints>"
+	description "A Deep Security covert monitor vessel has been compromised in the <waypoints> system carrying an 'Encrypted Intelligence Manifest'."
+	repeat
+	source
+		attributes "The Deep"
+	destination <origin>
+	waypoint
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Falcon" "Destroyed Deep Observer"
+		on board
+			conversation
+				"Your boarding party rips the hidden terminal out of the dead vessel's command console. The officer reports the manifest is secured, but the tamper protocols have initiated a localized self-destruct and a pirate intercept fleet is breaking from hyperspace."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You arrive safely at <origin>. Deep Intelligence officers silently confiscate the drive and erase all local access logs."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"Deep Security Intelligence places a massive bounty and operational block on your license for the lost data."
+		"reputation: Deep Security" -= 0.20
+
+mission "Rescue Military Deep Security Agents"
+	name "Secure Deep Security Fleet Core in <waypoints>"
+	description "A high-clearance tactical containment team has suffered critical hull collapse deep in the unmapped sectors of the <waypoints> system."
+	repeat
+	source
+		attributes "The Deep"
+	passengers 20 10 1
+	destination <origin>
+	waypoint
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Falcon" "Classified Deep Vanguard Wreck"
+		on board
+			conversation
+				"Commanders wearing unlisted insignia breach into your ship. The agent snaps to lock down all outgoing system comms as an aggressive interception fleet has just matched your local beacon coordinates."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You return silently to <origin>. Heavy armor transport details instantly seal off the private docking pad to receive the team and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"Deep Security Intelligence places a secure administrative lockdown black mark across your spacer pilot file."
+		"reputation: Deep Security" -= 0.25
+
+# Hard ones
+
+mission "Recovery Endgame Deep Security Core"
+	name "CRITICAL: Salvage Deep Security Singularity Core in <waypoints>"
+	description "A black-site classified mobile fortress carrying an 'Unstable Singularity Core' has suffered total system collapse in the <waypoints> system."
+	source
+		attributes "The Deep"
+	destination <origin>
+	waypoint
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Ruined Deep Security Fortress"
+		on board
+			conversation
+				"Your specialist crew extracts the dangerously unstable singularity mechanism. The chief yells that the core is secured but the gravity containment field is collapsing on the derelict, urging you to disengage as heavy raider warships and swarms of fast interceptors are dropping directly out of hyperspace on your coordinate tracks."
+			"deep_endgame_salvage" = 1
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You arrive safely at <origin>. Heavily armed deep operatives swarm your ship to silently extract the singularity core and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"Deep Security cuts all ties, completely revoking your clearance for losing a weapon of mass destruction."
+		"reputation: Deep Security" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30
+
+mission "Rescue Endgame Deep Security Agents"
+	name "CRITICAL: Evacuate Deep Intelligence Directors in <waypoints>"
+	description "A highly classified mobile fortress is undergoing structural failure in the <waypoints> system."
+	source
+		attributes "The Deep"
+	passengers 40 20 1
+	destination <origin>
+	waypoint
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Ruined Deep Security Fortress"
+		on board
+			conversation
+				"The airlock mechanisms are overridden as silent heavily armored agents pour onto your decks. A director states coldly to break orbit as the black-site is compromised and hostiles are tracking your beacon."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You safely navigate down to <origin>. Unmarked transports lock down the hangar area as the directors disembark in total silence and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Deep Security" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"Deep Security Intelligence places a kill order on your file because you allowed top-tier directors to fall into the hands of unknown hostiles."
+		"reputation: Deep Security" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30

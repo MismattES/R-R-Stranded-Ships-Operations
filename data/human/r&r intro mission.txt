@@ -1,0 +1,64 @@
+mission "R&R Operations Introduction"
+	name "Freelancer Contract: Simple Retrieval"
+	source
+		planet "Mars"
+	destination "Mars"
+	waypoint "Eteron"
+	to offer
+		"rr_intro_completed" == 0
+		"rr_intro_cooldown" <= "day"
+
+	on offer
+		conversation
+			branch "branch_a"
+				"rr_intro_offered" == 0
+				"rr_intro_failed_once" == 1
+			branch "branch_b"
+				"rr_intro_offered" == -1
+			"Hey, my name is Dana. I am a member of an organization that deals in recovering things and rescuing people. I have heard good things about you from some acquaintances. What do you think about doing a little retrieval on a nearby system? If you complete it, I will list you as authorized to receive more jobs like that."
+				goto "offer_choice"
+			label "branch_a"
+				"Let's try this again, pilot."
+					goto "offer_choice"
+			label "branch_b"
+				"Are you ready to take the contract now?"
+			label "offer_choice"
+				choice
+					"I can handle that. Lock in the coordinates."
+						accept
+					"Not interested. Find someone else."
+						decline
+
+	on accept
+		"rr_intro_offered" = 1
+
+	on decline
+		"rr_intro_offered" = -1
+
+	npc assist
+		system "Eteron"
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Disabled Auxiliary Hull"
+		on board
+			conversation
+				"Your engineering crew managed to get the system requested. Time to go find Dana."
+
+	npc evade
+		system "Eteron"
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+
+	on complete
+		conversation
+			"Dana is waiting for you at the landing pad. When you give her the box containing the system, she smiles and informs you that she looks forward to working with you again."
+		"rr_intro_completed" = 1
+		payment 25000
+
+	on fail
+		conversation
+			"Dana contacts your terminal."
+		"rr_intro_failed_once" = 1
+		"rr_intro_cooldown" = "day" + 30
+		"rr_intro_offered" = 0

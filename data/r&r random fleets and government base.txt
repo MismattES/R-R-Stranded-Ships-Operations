@@ -1,0 +1,34 @@
+# Map Overrides
+system "Phact"
+	government "R&R Stranded Ships Operations"
+
+system "Sol"
+	fleet "R&R Ops Recon Patrol" 1500
+		to spawn
+			"rr_intro_completed" >= 1
+	fleet "R&R Ops Heavy Response" 9000
+		to spawn
+			"rr_intro_completed" >= 1
+
+system "Sirius"
+	fleet "R&R Ops Recon Patrol" 1500
+		to spawn
+			"rr_intro_completed" >= 1
+	fleet "R&R Ops Heavy Response" 9000
+		to spawn
+			"rr_intro_completed" >= 1
+
+fleet "R&R Ops Heavy Response"
+	government "R&R Stranded Ships Operations"
+	variant
+		"Leviathan" 1
+		"Argosy" 2
+
+fleet "R&R Ops Recon Patrol"
+	government "R&R Stranded Ships Operations"
+	variant
+		"Hawk" 2
+		"Sparrow" 2
+
+government "Derelict 2"
+	color 0.5 0.5 0.5

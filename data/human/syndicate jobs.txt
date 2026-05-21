@@ -1,0 +1,239 @@
+# Syndicate Recovery and Rescue jobs
+# Easy ones
+
+mission "Recovery Standard Syndicate Asset"
+	name "Recover Syndicate Cybernetic Core from <waypoints>"
+	description "A corporate transport carrying a highly sensitive 'Stolen Cybernetic Server Array' has been ambushed in the <waypoints> system."
+	repeat
+	source
+		government "Syndicate"
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Disabled Syndicate Asset"
+		on board
+			conversation
+				"Your team breaks the terminal locks disconnecting the liquid-cooled processing stack. The hacker reports the core is detached but warns that the ship's security software just triggered an engine self-destruct cycle and you need to move."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. Syndicate technicians quickly wheel away the data array under heavy encryption covers and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The corporate board files legal penalties against your profile for allowing proprietary software assets to be wiped."
+		"reputation: Syndicate" -= 0.15
+
+
+mission "Rescue Stranded Syndicate Personnel"
+	name "Rescue Stranded Corporate Crew in <waypoints>"
+	description "Board the disabled Syndicate vessel stranded in the <waypoints> system. Transfer the <bunks> personnel to your ship, then bring them back here to <origin>."
+	repeat
+	source
+		government "Syndicate"
+	passengers 10 5 1
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Disabled Corporate Transport"
+		on board
+			conversation
+				"The corporate personnel filter through the airlock into your bunks. A manager yells to punch it as the drive core is spinning out of control."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. The corporate staff safely disembarks into the terminal avoiding eye contact and your bunks are now clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The Syndicate executive board fines your pilot profile heavily for the loss of corporate assets and personnel."
+		"reputation: Syndicate" -= 0.15
+
+#Mid ones
+
+mission "Recovery Military Syndicate Asset"
+	name "Salvage Corporate Tech in <waypoints>"
+	description "A highly classified corporate convoy carrying 'Proprietary Plasma Core Blueprints' has been heavily damaged in the <waypoints> system."
+	repeat
+	source
+		government "Syndicate"
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Falcon" "Scuttled Syndicate Transport"
+		on board
+			conversation
+				"Your tech specialist cracks the corporate safe and secures the encrypted drive. They shout that the blueprints are acquired but an aggressive counter-measure beacon has been triggered with pirate signatures incoming."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You touch down at <origin>. Corporate auditors quickly scan and lock away the blueprints ensuring proprietary secrets remain intact."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The Syndicate executive board heavily penalizes you for losing cutting-edge corporate research."
+		"reputation: Syndicate" -= 0.20
+
+mission "Rescue Military Syndicate Operators"
+	name "Secure Syndicate Black-Ops Asset in <waypoints>"
+	description "A heavily classified corporate operations division is marooned inside a dead hull within the <waypoints> system."
+	repeat
+	source
+		government "Syndicate"
+	passengers 20 10 1
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Falcon" "Classified Syndicate Capital Wreck"
+		on board
+			conversation
+				"Uniformed paramilitary contractors scramble inside. The director barks that primary mission data is purged warning that tracking crosshairs are locking onto your positional coordinates and you need to move out."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You slip down to <origin>. Executive transport craft receive the agents under heavy electronic jamming curtains and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The corporate board strips away your operating licenses because leaving high-value corporate operations teams to die is an unforgivable asset write-off."
+		"reputation: Syndicate" -= 0.25
+
+#Hard ones
+
+mission "Recovery Endgame Syndicate Tech"
+	name "CRITICAL: Salvage Syndicate AI Logic Core in <waypoints>"
+	description "A stealth corporate super-freighter hauling an 'Unreleased AI Logic Processor' has been shattered in the <waypoints> system."
+	source
+		government "Syndicate"
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Ruined Corporate Super-Freighter"
+		on board
+			conversation
+				"Your specialist team overrides the cryogenic locks on the server farm. The chief yells that the AI Processor is secured in the hold but breaking the final seal triggered the freighter's self-destruct cycle urging you to disengage as heavy raider warships and swarms of fast interceptors drop directly out of hyperspace."
+			"syndicate_endgame_salvage" = 1
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You arrive safely at <origin>. Executive security teams lock down the hangar and cart the AI logic drive away to an underground bunker while your holds are cleared."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The corporate board legally ruins you because allowing an unreleased AI processor to hit the black market is a catastrophic loss for the Syndicate."
+		"reputation: Syndicate" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30
+
+mission "Rescue Endgame Syndicate Operators"
+	name "CRITICAL: Evacuate Corporate Executives in <waypoints>"
+	description "A super-freighter carrying the corporate board of directors is failing under fire in the <waypoints> system."
+	source
+		government "Syndicate"
+	passengers 40 20 1
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Ruined Corporate Super-Freighter"
+		on board
+			conversation
+				"The main airlock buckles as panicked corporate executives pour onto your decks. A board member screams to launch immediately as the outer sector defensive wall has shattered and interceptors are right on your tail."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You safely navigate down to <origin>. Private security contractors surround your ship rushing the board members to an armored convoy and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Syndicate" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The Syndicate bankrupts you because allowing the board of directors to perish in hostile space is a lethal liability."
+		"reputation: Syndicate" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30

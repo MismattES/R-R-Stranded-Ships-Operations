@@ -1,0 +1,62 @@
+government "R&R Stranded Ships Operations"
+	"display name" "R&R Operators"
+	color 1.0 1.0 0.24
+	swizzle 22
+
+	"attitude toward"
+		"Republic" 0.01
+		"Syndicate" -0.02
+		"Free Worlds" 0.03
+		"Pirate" -0.04
+		"Pirate Anarchists" -0.04
+		"Marauder" -0.04
+		"Independent" 0.02
+		"Militia" 0.02
+		"Deep Security" 0.02
+		"Hai" 0.3
+		"Quarg" 0.05
+
+	reputation
+		"player reputation" 0
+		min -50000
+		max 50000
+
+	"penalty for"
+		assist 0.5
+		disable 3
+		board 1
+		capture 2
+		destroy 5
+		scan 0
+		provoke 0
+		atrocity 10
+
+	"foreign penalties for" "Hai"
+
+	"crew attack" 1.05
+	"crew defense" 2.05
+
+	bribe 0.025
+	fine 0.75
+
+	"friendly hail" "R&R Ops"
+	"hostile hail" "R&R Ops"
+	"friendly disabled hail" "R&R Ops"
+	"hostile disabled hail" "R&R Ops"
+
+	language "R&R Tactical Comms"
+	"send untranslated hails"
+
+	raid "R&R Ops Recon Patrol" 8
+
+government "R&R Ops"
+	color 0.2 0.6 0.9
+
+government "Republic Intelligence"
+	color 0.1 0.2 0.7
+
+government "Pirate Anarchists"
+	color 0.8 0.1 0.1
+
+government "control.station.administration"
+	color 0.5 0.5 0.5

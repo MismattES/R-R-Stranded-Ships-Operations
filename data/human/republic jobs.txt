@@ -1,0 +1,239 @@
+# Republic Recovery and Rescue jobs
+# Easy ones
+
+mission "Recovery Standard Republic Asset"
+	name "Recover Republic Railgun Prototype in <waypoints>"
+	description "A forward Naval patrol ship carrying a high-velocity 'Experimental Railgun Housing' has been disabled in the <waypoints> system."
+	repeat
+	source
+		attributes "human"
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Stranded Navy Vessel"
+		on board
+			conversation
+				"Your crew cuts open the forward weapon bay extracting the dense magnetic rails. The engineer radios that you have the hardware but slicing the magnetic lock tripped an automated thermal overload urging you to get out of there."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. Fleet ordnance officers assume control of the weapon asset."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The Navy is furious that you allowed advanced Republic ballistics technology to be lost."
+		"reputation: Republic" -= 0.15
+
+mission "Rescue Stranded Republic Soldiers"
+	name "Rescue Stranded Crew in the <waypoints> System"
+	description "Board the disabled Republic vessel stranded in the <waypoints> system. Transfer the <bunks> passengers to your ship, then bring them back here before their life support expires."
+	repeat
+	source
+		attributes "human"
+	passengers 10 5 1
+	destination <origin>
+	waypoint 
+		distance 2 7
+	deadline
+	to offer
+		"rr_intro_completed" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Headhunter" "Stranded Navy Vessel"
+		on board
+			conversation
+				"The passengers scramble through the airlock into your bunks. The last crewman yells to go warning that the reactor core is about to go critical."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 2
+	on complete
+		conversation
+			"You return to <origin>. The passengers safely disembark into the terminal relieved to be home and your bunks are now clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.01
+		payment 45000
+	on fail
+		conversation
+			"The Navy is furious that you allowed the rescued soldiers to perish under your care."
+		"reputation: Republic" -= 0.15
+
+# Mid ones
+
+mission "Recovery Military Republic Asset"
+	name "Recover Republic Military Comm Hub in <waypoints>"
+	description "A heavy frontline fleet asset carrying a 'Classified Platoon Tactical Array' mainframe has been disabled in the <waypoints> system."
+	repeat
+	source
+		attributes "human"
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+		"rr_operations_jobs_done" >= 40
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Vanguard" "Battered Republic Fleet Hull"
+		on board
+			conversation
+				"Your boarding party detaches the heavy tactical routing matrix from the bridge console. The officer radios that it is secure but the power network is melting down into the fuel stores urging you to break away now as a Pirate Fleet has just dropped into the sector."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You touch down safely at <origin>. Fleet technicians swiftly disconnect the tactical array and lock it down in the base armory."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The Republic Naval command strongly reprimands you for losing a classified military array."
+		"reputation: Republic" -= 0.20
+
+mission "Rescue Military Republic Soldiers"
+	name "Evacuate Stranded Platoons in <waypoints>"
+	description "A major naval operations unit is trapped aboard a battered capital hull in the <waypoints> system."
+	repeat
+	source
+		attributes "human"
+	passengers 20 10 1
+	destination <origin>
+	waypoint 
+		distance 4 9
+	deadline
+	to offer
+		"rr_mid_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Vanguard" "Battered Republic Fleet Hull"
+		on board
+			conversation
+				"The armored blast doors seal as dozens of heavy infantry push into your corridors. The Commander roars that you have zero time as scanners show an entire Pirate battle group jumping into your coordinates quadrant right now."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You return to <origin>. An elite guard escort sweeps the hangar bay safely extracting the specialized squads and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.05
+		payment 100000
+	on fail
+		conversation
+			"The High Admiralty holds a closed tribunal session because they are absolutely furious at the massive loss of elite fleet personnel under your watch."
+		"reputation: Republic" -= 0.25
+
+# Hard ones
+
+mission "Recovery Endgame Republic Core"
+	name "CRITICAL: Salvage Republic Antimatter Engine Core in <waypoints>"
+	description "A massive frontline Capital warship carrying an experimental 'Prototype Antimatter Engine Core' has sustained terminal structural damage in the <waypoints> system."
+	source
+		attributes "human"
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Burning Fleet Flagship"
+		on board
+			conversation
+				"Your plasma-cutting frames extract the massive humming magnetic containment vessel. The deck chief yells that the antimatter core is secure in your bay but severing the stabilizing mounts has started a total structural explosion cycle urging you to disengage as heavy raider warships and swarms of fast interceptors drop directly out of hyperspace on your coordinate tracks."
+			"republic_endgame_salvage" = 1
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You arrive safely at <origin>. Heavy Naval escorts clear out the civilian spaceport sectors to offload the unstable engine core and your holds are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The High Admiralty issues an immediate court-martial because allowing an experimental antimatter drive asset to fall into hostile pirate hands risks sector-wide destruction."
+		"reputation: Republic" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30
+
+mission "Rescue Endgame Republic Soldiers"
+	name "CRITICAL: Evacuate Stranded Fleet Command in <waypoints>"
+	description "A massive frontline battlefleet core is collapsing. Board the crippled command warship in the <waypoints> system, transfer the <bunks> high-ranking military commanders, and jump to <origin> immediately."
+	source
+		attributes "human"
+	passengers 40 20 1
+	destination <origin>
+	waypoint 
+		distance 8 13
+	deadline
+	to offer
+		"your_mission_cooldown_date" <= "day"
+		"rr_hard_tier_unlocked" == 1
+	npc assist
+		system <waypoints>
+		government "Derelict"
+		personality derelict target pacifist mute
+		ship "Leviathan" "Burning Fleet Flagship"
+		on board
+			conversation
+				"The main airlock buckles under catastrophic stress as hundreds of wounded fleet staff pour onto your decks. An Admiral screams to get them out of there as the entire outer sector defensive wall has shattered and interceptors are right on your tail."
+	npc
+		system <waypoints>
+		government "Pirate"
+		personality staying
+		fleet "Small Southern Pirates" 3
+		fleet "Small Core Pirates" 2
+		fleet "Large Core Pirates" 1
+		fleet "Large Southern Pirates" 1
+	on complete
+		conversation
+			"You safely navigate down to <origin>. Heavily armed guards surround your ship rushing the surviving fleet command straight to the medical bunkers and your bunks are clear."
+		"rr_operations_jobs_done" ++
+		"reputation: Republic" += 0.15
+		"your_mission_cooldown_date" = "day" + 15
+		payment 250000
+	on fail
+		conversation
+			"The High Admiralty issues an immediate court-martial because allowing the fleet command structure to perish in hostile space is treason."
+		"reputation: Republic" -= 0.40
+		"your_mission_cooldown_date" = "day" + 30
