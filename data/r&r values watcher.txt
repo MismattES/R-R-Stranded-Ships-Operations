@@ -1,0 +1,32 @@
+mission "R&R Pirate Reputation Monitor"
+	invisible
+	repeat
+	to offer
+		"reputation: Pirate" >= 100
+		"reputation: R&R Stranded Ships Operations" >= 0
+	on offer
+		"reputation: R&R Stranded Ships Operations" = -10
+		
+mission "R&R Mid Tier Requirement Monitor"
+	invisible
+	repeat
+	to offer
+		or
+			and
+				"rr_operations_jobs_done" >= 20
+				"combat rating" >= 40
+			"rr_operations_jobs_done" >= 40
+	on offer
+		"rr_mid_tier_req" = 1
+
+mission "R&R Hard Tier Requirement Monitor"
+	invisible
+	repeat
+	to offer
+		or
+			and
+				"rr_operations_jobs_done" >= 50
+				"combat rating" >= 100
+			"rr_operations_jobs_done" >= 100
+	on offer
+		"rr_hard_tier_req" = 1

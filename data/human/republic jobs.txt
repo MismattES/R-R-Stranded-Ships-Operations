@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Republic Asset"
 	name "Recover Republic Railgun Prototype in <destination>"
-	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> system and extract its dense magnetic rails weighting <cargo> tons . Payment for returning the prototype is 45,000 credits."
+	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> system and extract its dense magnetic rails weighting <cargo> tons. Drop the prototype off at the local spaceport there. Payment for returning the prototype is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -15,40 +15,37 @@ mission "Recovery Standard Republic Asset"
 	cargo 10 20 0.7
 	to offer
 		"rr_intro_completed" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Headhunter" "Stranded Navy Vessel"
-		on board
-			conversation
-				"Your crew cuts open the forward weapon bay extracting the dense magnetic rails."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Headhunter" "Stranded Navy Vessel"
+			on assist
+				"rep_asset_ambush_1_ready" = 1
+				conversation
+					"Your crew cuts open the forward weapon bay extracting the dense magnetic rails."
+			
 	on complete
-		"rep_asset_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. Republic Navy quartermasters take custody of the magnetic rails and your holds are clear."
+			"You land at the local spaceport. Republic Navy quartermasters take custody of the magnetic rails and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
 			"Republic Navy quartermasters note a significant failure on your operational record."
 		"reputation: Republic" -= 0.15
-
-mission "Recovery Standard Republic Asset Ambush"
-	invisible
-	to offer
-		"rep_asset_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"rep_asset_ambush_1_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "A Republic logistics clerk looks at your file with indifference. 'Aborting a standard recovery mission? We don't have time for hesitation. Your lack of professionalism has been noted and marked in your personnel file.'"
+        "reputation: Republic" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
 
 mission "Rescue Stranded Republic Soldiers"
-	name "Rescue Stranded Crew in the <destination> System"
-	description "A Republic Navy vessel is stranded in the <destination> system. You are to extract the crew and return them to port for reassignment. Payment for their safe return is 45,000 credits."
+	name "Rescue Stranded Republic Crew in <destination>"
+	description "A Republic Navy vessel is stranded in the <destination> system. You are to extract the crew and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -60,41 +57,38 @@ mission "Rescue Stranded Republic Soldiers"
 		not attributes "uninhabited"
 	to offer
 		"rr_intro_completed" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Headhunter" "Stranded Navy Vessel"
-		on board
-			conversation
-				"The passengers scramble through the airlock into your bunks."
+	on accept
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Headhunter" "Stranded Navy Vessel"
+			on assist
+				"rep_rescue_ambush_1_ready" = 1
+				conversation
+					"The stranded Republic crew quickly boards your ship, eager to return to duty."
+			
 	on complete
-		"rep_rescue_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. The stranded Navy crew disembarks to report for reassignment and your bunks are clear."
+			"You land at the local spaceport. The Republic crew disembarks to rejoin the fleet and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
-			"A Republic logistics officer coldly informs you that your failure to extract their personnel has been logged."
+			"Republic Navy command marks a failure on your log for the loss of their stranded personnel."
 		"reputation: Republic" -= 0.15
-
-mission "Rescue Stranded Republic Soldiers Ambush"
-	invisible
-	to offer
-		"rep_rescue_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"rep_rescue_ambush_1_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "A Republic logistics officer coldly informs you: 'You were tasked with extracting Republic personnel and you walked away. That is a dereliction of duty, and the Republic does not tolerate such behavior.'"
+        "reputation: Republic" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
 
 # Mid ones
 mission "Recovery Military Republic Asset"
-	name "Recover Republic Military Comm Hub in <destination>"
-	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> tons from a battered fleet hull in the <destination> system. Payment for securing this military comm hub is 100,000 credits."
+	name "Retrieve Republic Routing Matrix in <destination>"
+	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> tons from a battered fleet hull in the <destination> system. Secure it at the local spaceport there. Payment for securing this military comm hub is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -106,41 +100,37 @@ mission "Recovery Military Republic Asset"
 	cargo 40 70 0.4
 	to offer
 		"rr_mid_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Vanguard" "Battered Republic Fleet Hull"
-		on board
-			conversation
-				"Your boarding party detaches the heavy tactical routing matrix from the bridge console."
+	on accept
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Falcon" "Battered Fleet Hull"
+			on assist
+				"rep_asset_ambush_2_ready" = 1
+				conversation
+					"Your boarding party successfully rips the tactical routing matrix from the dead vessel's command node."
+			
 	on complete
-		"rep_asset_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. Republic Fleet engineers secure the tactical routing matrix and your holds are clear."
+			"You land safely at the local spaceport. Republic Fleet engineers take custody of the matrix and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
 	on fail
 		conversation
-			"A Republic Fleet commander issues a stern warning regarding your failure to secure military objectives."
+			"Republic Fleet officials formally reprimand you for the loss of critical tactical assets."
 		"reputation: Republic" -= 0.20
-
-mission "Recovery Military Republic Asset Ambush"
-	invisible
-	to offer
-		"rep_asset_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"rep_asset_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+	on abort
+        conversation
+            "The Republic Fleet commander stares at you with disdain. 'That tactical matrix was a military priority. Aborting your commitment because you grew fearful is a pathetic display of cowardice. You are dismissed.'"
+        "reputation: Republic" -= 0.25
+        "reputation: R&R Stranded Ships Operations" -= 0.25
 
 mission "Rescue Military Republic Soldiers"
-	name "Evacuate Stranded Platoons in <destination>"
-	description "A platoon of Republic heavy infantry is trapped aboard a battered fleet hull in the <destination> system. You are tasked with their immediate evacuation. Payment for this mid-tier extraction is 100,000 credits."
+	name "Extract Republic Infantry from <destination>"
+	description "A platoon of Republic heavy infantry is trapped aboard a battered fleet hull in the <destination> system. You are tasked with their immediate evacuation to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -152,42 +142,38 @@ mission "Rescue Military Republic Soldiers"
 		not attributes "uninhabited"
 	to offer
 		"rr_mid_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Vanguard" "Battered Republic Fleet Hull"
-		on board
-			conversation
-				"The armored blast doors seal as dozens of heavy infantry push into your corridors."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Falcon" "Battered Fleet Hull"
+			on assist
+				"rep_rescue_ambush_2_ready" = 1
+				conversation
+					"A platoon of Republic heavy infantry secures themselves in your hold."
+			
 	on complete
-		"rep_rescue_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. The Republic heavy infantry deploy onto the landing pad and your bunks are clear."
+			"You land safely at the local spaceport. The infantry disembarks to report to local Republic command and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
 	on fail
 		conversation
-			"Republic Command officially censures you for the loss of an entire tactical platoon."
+			"The Republic Parliament issues a severe deduction to your reputation for failing to extract their heavy infantry."
 		"reputation: Republic" -= 0.25
-
-mission "Rescue Military Republic Soldiers Ambush"
-	invisible
-	to offer
-		"rep_rescue_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"rep_rescue_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.25
+	on abort
+        conversation
+            "Republic Command officially censures you: 'An entire tactical platoon left stranded due to your inability to finish a mission? You’ve proven yourself to be a complete liability to the Republic. Do not expect further contracts.'"
+        "reputation: Republic" -= 0.30
+        "reputation: R&R Stranded Ships Operations" -= 0.30
 
 # Hard ones
 mission "Recovery Endgame Republic Core"
-	name "CRITICAL: Salvage Republic Antimatter Engine Core in <destination>"
-	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> tons from a burning Fleet Flagship in the <destination> system. This is a top-priority strategic initiative. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 250,000 credits."
+	name "CRITICAL: Extract Republic Antimatter Engine from <destination>"
+	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> tons from a burning Fleet Flagship in the <destination> system. Deliver it to the local spaceport there. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -200,45 +186,40 @@ mission "Recovery Endgame Republic Core"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Leviathan" "Burning Fleet Flagship"
-		on board
-			conversation
-				"Your plasma-cutting frames extract the massive humming magnetic containment vessel."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Leviathan" "Burning Fleet Flagship"
+			on assist
+				"rep_endgame_asset_ambush_ready" = 1
+				conversation
+					"Your team successfully cuts the antimatter engine core free as the flagship's hull integrity drops to critical levels."
+			
 	on complete
-		"rep_endgame_core_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. Republic Fleet engineers stabilize the antimatter core as it is offloaded. 'This level of efficiency is exemplary,' the officer notes, 'The Republic will surely reward your discretion and skill.'"
+			"You safely navigate down to the local spaceport. Republic Fleet engineers quickly secure the volatile core and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
-			"A high-ranking Republic Admiral appears on your screen, his face cold and emotionless. 'The Republic does not tolerate incompetence. By losing that core, you have compromised a significant strategic initiative. Your flight privileges are revoked for the next thirty days.'"
+			"The Republic Navy officially terminates your clearance for the loss of a top-tier Fleet asset."
 		"reputation: Republic" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
-
-mission "Recovery Endgame Republic Core Ambush"
-	invisible
-	to offer
-		"rep_endgame_core_ambush_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"rep_endgame_core_ambush_ready" = 0
+	on abort
+        conversation
+            "The Republic Admiral's voice is frigid. 'That antimatter core was a strategic necessity. Your choice to abort has severely compromised our local defensive capabilities. Your clearance is revoked—immediately.'"
+        "reputation: Republic" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+        "your_mission_cooldown_date" = day + 30
 
 mission "Rescue Endgame Republic Soldiers"
-	name "CRITICAL: Evacuate Stranded Fleet Command in <destination>"
-	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination> system. You must evacuate of highly valuable Fleet Command staff under heavy enemy fire. Payment for this endgame evacuation is 250,000 credits."
+	name "CRITICAL: Evacuate Fleet Command Staff from <destination>"
+	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination> system. You must evacuate hundreds of highly valuable Fleet Command staff under heavy enemy fire to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -251,26 +232,93 @@ mission "Rescue Endgame Republic Soldiers"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Leviathan" "Burning Fleet Flagship"
-		on board
-			conversation
-				"The main airlock buckles under catastrophic stress as hundreds of wounded fleet staff pour onto your decks."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Leviathan" "Burning Fleet Flagship"
+			on assist
+				"rep_endgame_rescue_ambush_ready" = 1
+				conversation
+					"The main airlock buckles under catastrophic stress as hundreds of wounded fleet staff pour onto your decks."
+			
 	on complete
-		"rep_endgame_rescue_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. Republic Fleet command takes charge of the evacuated staff. 'You have saved valuable command assets today,' the Admiral states, 'Your name is now at the top of our list for high-priority contracts.'"
+			"You safely navigate down to the local spaceport. Republic Fleet command takes charge of the evacuated staff. 'You have saved valuable command assets today,' the Admiral states, 'Your name is now at the top of our list for high-priority contracts.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Republic" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
 			"A high-level Republic intelligence officer stares coldly from your screen. 'The loss of our Fleet Command staff is an unforgivable breach of protocol. Your clearance has been permanently flagged, and you will be barred from all Republic operations for thirty days while we conduct an investigation.'"
 		"reputation: Republic" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
+	on abort
+        conversation
+            "A high-ranking intelligence officer logs your abort. 'You abandoned Fleet Command staff in a warzone. This level of incompetence is beyond salvage. Your clearance is permanently flagged, and you are officially blacklisted.'"
+        "reputation: Republic" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+        "your_mission_cooldown_date" = day + 30
+
+# --- Ambush Missions ---
+
+mission "Recovery Standard Republic Asset Ambush"
+	invisible
+	to offer
+		"rep_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Rescue Stranded Republic Soldiers Ambush"
+	invisible
+	to offer
+		"rep_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Recovery Military Republic Asset Ambush"
+	invisible
+	to offer
+		"rep_asset_ambush_2_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Rescue Military Republic Soldiers Ambush"
+	invisible
+	to offer
+		"rep_rescue_ambush_2_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Recovery Endgame Republic Core Ambush"
+	invisible
+	to offer
+		"rep_endgame_asset_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1
 
 mission "Rescue Endgame Republic Soldiers Ambush"
 	invisible
@@ -281,8 +329,6 @@ mission "Rescue Endgame Republic Soldiers Ambush"
 		government "Pirate"
 		personality "hunting"
 		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"rep_endgame_rescue_ambush_ready" = 0
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1

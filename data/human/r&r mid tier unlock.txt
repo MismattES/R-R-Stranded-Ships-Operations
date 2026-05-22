@@ -1,22 +1,19 @@
 mission "R&R Mid-Tier Invitation"
 	name "Freelancer Contract: Mid-Tier Qualification"
-	description "Dana is testing your capabilities for higher-tier operations. You are tasked with acting as the primary extraction unit for a damaged R&R Ops Recovery Hull stranded in the <waypoints> system. Be prepared for heavy hostile interception. Your reward is elevated clearance for mid-tier contracts."
+	description "Dana is testing your capabilities. Act as the primary extraction unit for a hull stranded in the Regulus system. Be prepared for heavy hostile interception. Return to Ada to complete the contract and receive your clearance."
 	source
 		planet "Ada"
-	waypoint
-		system "Regulus"
+	destination "Ada"
+	waypoint "Regulus"
 	to offer
 		"rr_mid_tier_unlocked" == 0
 		"rr_mid_tier_started" == 0
-		or
-			and
-				"rr_operations_jobs_done" >= 20
-				"combat rating" >= 40
-			"rr_operations_jobs_done" >= 40
+		"rr_mid_tier_cooldown" <= day
+		"rr_mid_tier_req" = 1
 
 	on offer
 		conversation
-			"Dana's face appears on your terminal. She tells you she has been tracking your work, and you are ready for more. She has a critical rescue operation in the <waypoints> system, and if you pull it off, she will clear you for all of their high-priority contracts."
+			"Dana's face appears on your terminal. She tells you she has been tracking your work, and you are ready for more. She has a critical rescue operation in the Regulus system, and if you pull it off, she will clear you for all of their high-priority contracts."
 			choice
 				"Send the coordinates. I'm on my way."
 					accept
@@ -29,21 +26,27 @@ mission "R&R Mid-Tier Invitation"
 	passengers 20 10 1
 
 	npc
-		system "Regulus"
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Falcon" "Damaged R&R Ops Recovery Hull"
-		on board
+		on assist
+			"rr_mid_tier_ambush_ready" = 1
 			conversation
 				"You're the extraction unit? Good, we've got heavy hostiles on our tail!"
-	
+
 	on complete
-		"rr_mid_tier_ambush_ready" = 1
 		conversation
 			"Excellent work. You've proven you can handle the heat. I'm updating your clearance level now."
 		"rr_mid_tier_unlocked" = 1
-		"rr_operations_jobs_done" ++
-		payment 100000
+		"rr_mid_tier_started" = 0
+		"reputation: R&R Stranded Ships Operations" += 0.10
+
+	on fail
+		conversation
+			"Dana's expression is cold. 'The operation was a disaster. We can't afford these kinds of losses on a mid-tier contract. I'm locking you out of R&R field operations for a while so you can reflect on your performance.'"
+		"rr_mid_tier_started" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+		"rr_mid_tier_cooldown" = day + 15
 
 mission "R&R Mid-Tier Ambush"
 	invisible
@@ -51,10 +54,7 @@ mission "R&R Mid-Tier Ambush"
 		"rr_mid_tier_ambush_ready" == 1
 	deadline 1
 	npc
-		system "Regulus"
 		government "Pirate"
 		personality "hunting"
 		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"rr_mid_tier_ambush_ready" = 0
+		fleet "Large Southern Pirates" 1

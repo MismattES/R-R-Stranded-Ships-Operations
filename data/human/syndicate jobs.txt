@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Syndicate Asset"
 	name "Recover Syndicate Cybernetic Core from <destination>"
-	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> tons from a disabled asset in the <destination> system. Payment for returning the cybernetic core is 45,000 credits."
+	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> tons from a disabled asset in the <destination> system. Drop the core off at the local spaceport there. Payment for returning the cybernetic core is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -15,40 +15,37 @@ mission "Recovery Standard Syndicate Asset"
 	cargo 10 20 0.7
 	to offer
 		"rr_intro_completed" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Headhunter" "Disabled Syndicate Asset"
-		on board
-			conversation
-				"Your team breaks the terminal locks disconnecting the liquid-cooled processing stack."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Headhunter" "Disabled Syndicate Asset"
+			on assist
+				"syn_asset_ambush_1_ready" = 1
+				conversation
+					"Your team breaks the terminal locks disconnecting the liquid-cooled processing stack."
+			
 	on complete
-		"syn_asset_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. Syndicate operatives silently collect the liquid-cooled processing stack and your holds are clear."
+			"You land at the local spaceport. Syndicate operatives silently collect the liquid-cooled processing stack and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
 			"A Syndicate clerk efficiently logs your failure, noting a minor deduction in your reliability rating."
 		"reputation: Syndicate" -= 0.15
-
-mission "Recovery Standard Syndicate Asset Ambush"
-	invisible
-	to offer
-		"syn_asset_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"syn_asset_ambush_1_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "A Syndicate clerk looks up from their terminal with utter boredom. 'Quitting a job mid-operation? That's a breach of contract, Captain. Our clients don't like paying for hesitation. Consider your standing with us permanently tarnished.'"
+        "reputation: Syndicate" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
 
 mission "Rescue Stranded Syndicate Personnel"
 	name "Rescue Stranded Corporate Crew in <destination>"
-	description "A corporate transport has been disabled in the <destination> system. You are to retrieve the stranded corporate personnel and return them to Syndicate space. Payment for their safe return is 45,000 credits."
+	description "A corporate transport has been disabled in the <destination> system. You are to retrieve the stranded corporate personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -60,41 +57,38 @@ mission "Rescue Stranded Syndicate Personnel"
 		not attributes "uninhabited"
 	to offer
 		"rr_intro_completed" == 1
+		
 	npc
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Headhunter" "Disabled Corporate Transport"
-		on board
+		on assist
+			"syn_rescue_ambush_1_ready" = 1
 			conversation
 				"The corporate personnel filter through the airlock into your bunks."
+			
 	on complete
-		"syn_rescue_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. The corporate personnel quickly disembark and your bunks are clear."
+			"You land at the local spaceport. The corporate personnel quickly disembark and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
 			"Syndicate human resources revokes a portion of your standing for abandoning their employees."
 		"reputation: Syndicate" -= 0.15
-
-mission "Rescue Stranded Syndicate Personnel Ambush"
-	invisible
-	to offer
-		"syn_rescue_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"syn_rescue_ambush_1_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "The Syndicate handler’s voice is sharp and dangerous. 'Abandoning corporate assets? You’re lucky we don’t count you as a liability for that kind of incompetence. Don't expect any more contracts from our payroll.'"
+        "reputation: Syndicate" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
 
 # Mid ones
 mission "Recovery Military Syndicate Asset"
 	name "Salvage Corporate Tech in <destination>"
-	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> tons from a scuttled Syndicate transport in the <destination> system. Payment for salvaging this corporate tech is 100,000 credits."
+	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> tons from a scuttled Syndicate transport in the <destination> system. Secure it at the local spaceport there. Payment for salvaging this corporate tech is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -106,41 +100,37 @@ mission "Recovery Military Syndicate Asset"
 	cargo 40 70 0.4
 	to offer
 		"rr_mid_tier_unlocked" == 1
+		
 	npc
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Falcon" "Scuttled Syndicate Transport"
-		on board
+		on assist
+			"syn_military_asset_ambush_1_ready" = 1
 			conversation
 				"Your tech specialist cracks the corporate safe and secures the encrypted drive."
+			
 	on complete
-		"syn_asset_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. A Syndicate black-suit detail retrieves the encrypted drive and your holds are clear."
+			"You land safely at the local spaceport. A Syndicate black-suit detail retrieves the encrypted drive and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
 	on fail
 		conversation
 			"Syndicate executives freeze a portion of your operational assets as a penalty for the botched contract."
 		"reputation: Syndicate" -= 0.20
-
-mission "Recovery Military Syndicate Asset Ambush"
-	invisible
-	to offer
-		"syn_asset_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"syn_asset_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+	on abort
+        conversation
+            "A Syndicate executive sneers at your transmission. 'Stealing corporate tech is one thing, but walking away from a secured contract? That’s amateur hour. We have no place for cowards in the Syndicate.'"
+        "reputation: Syndicate" -= 0.25
+        "reputation: R&R Stranded Ships Operations" -= 0.25
 
 mission "Rescue Military Syndicate Operators"
 	name "Secure Syndicate Black-Ops Asset in <destination>"
-	description "A team of uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination> system. Payment for securing this black-ops asset is 100,000 credits."
+	description "A team of uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination> system. Transport them to the local spaceport there. Payment for securing this black-ops asset is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -152,42 +142,38 @@ mission "Rescue Military Syndicate Operators"
 		not attributes "uninhabited"
 	to offer
 		"rr_mid_tier_unlocked" == 1
+		
 	npc
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Falcon" "Classified Syndicate Capital Wreck"
-		on board
+		on assist
+			"syn_military_rescue_ambush_1_ready" = 1
 			conversation
 				"Uniformed paramilitary contractors scramble inside."
+			
 	on complete
-		"syn_rescue_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. The paramilitary contractors disembark without a word and your bunks are clear."
+			"You land safely at the local spaceport. The paramilitary contractors disembark without a word and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
 	on fail
 		conversation
 			"The Syndicate's security division places a red mark on your file for the loss of their black-ops team."
 		"reputation: Syndicate" -= 0.25
-
-mission "Rescue Military Syndicate Operators Ambush"
-	invisible
-	to offer
-		"syn_rescue_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"syn_rescue_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.25
+	on abort
+        conversation
+            "The Syndicate security chief laughs coldly. 'A team of our best operatives left to rot because you got cold feet? Your name is effectively mud in our circles now, Captain.'"
+        "reputation: Syndicate" -= 0.30
+        "reputation: R&R Stranded Ships Operations" -= 0.30
 
 # Hard ones
 mission "Recovery Endgame Syndicate Tech"
 	name "CRITICAL: Salvage Syndicate AI Logic Core in <destination>"
-	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm aboard a ruined corporate super-freighter in the <destination> system. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm aboard a ruined corporate super-freighter in the <destination> system. Deliver it to the local spaceport there. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -200,45 +186,40 @@ mission "Recovery Endgame Syndicate Tech"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
+		
 	npc
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Leviathan" "Ruined Corporate Super-Freighter"
-		on board
+		on assist
+			"syn_endgame_asset_ambush_ready" = 1
 			conversation
 				"Your specialist team overrides the cryogenic locks on the server farm."
+			
 	on complete
-		"syn_endgame_tech_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. Corporate executives supervise the extraction of the server farm. 'Flawless execution,' the supervisor notes, handing over your payment, 'The Syndicate appreciates assets who deliver results without asking questions.'"
+			"You safely navigate down to the local spaceport. Corporate executives supervise the extraction of the server farm. 'Flawless execution,' the supervisor notes, handing over your payment, 'The Syndicate appreciates assets who deliver results without asking questions.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
 			"A Syndicate black-suit supervisor leans into the camera, his voice a low, dangerous whisper. 'You were hired because we thought you were efficient. Losing that AI core has cost the Syndicate millions. Consider yourself suspended from all further operations while we settle our accounts.'"
 		"reputation: Syndicate" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
-
-mission "Recovery Endgame Syndicate Tech Ambush"
-	invisible
-	to offer
-		"syn_endgame_tech_ambush_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"syn_endgame_tech_ambush_ready" = 0
+	on abort
+        conversation
+            "A black-suit supervisor leans into the frame, voice a low, lethal whisper. 'That core was worth millions. You’ve cost us more than just time; you’ve cost us leverage. You are finished in Syndicate airspace.'"
+        "reputation: Syndicate" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+        "your_mission_cooldown_date" = day + 30
 
 mission "Rescue Endgame Syndicate Operators"
 	name "CRITICAL: Evacuate Corporate Executives in <destination>"
-	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> system holds a crew of panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them before rival elements arrive. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> system holds a crew of panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them to the local spaceport there before rival elements arrive. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -251,26 +232,93 @@ mission "Rescue Endgame Syndicate Operators"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
+		
 	npc
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Leviathan" "Ruined Corporate Super-Freighter"
-		on board
+		on assist
+			"syn_endgame_rescue_ambush_ready" = 1
 			conversation
 				"The main airlock buckles as panicked corporate executives pour onto your decks."
+			
 	on complete
-		"syn_endgame_rescue_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. A heavy security escort guides the panicked corporate executives away. 'You've salvaged a delicate political situation,' the handler says, 'Your standing with the board has increased significantly.'"
+			"You safely navigate down to the local spaceport. A heavy security escort guides the panicked corporate executives away. 'You've salvaged a delicate political situation,' the handler says, 'Your standing with the board has increased significantly.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Syndicate" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
 			"The Syndicate executive's face turns beet red as he slams his fist onto his desk. 'Executives are not disposable assets! You've cost us months of political leverage. Get out of our sight—you're banned from Syndicate airspace for thirty days, and consider yourself lucky we don't put a price on your head.'"
 		"reputation: Syndicate" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
+	on abort
+        conversation
+            "The executive slams his fist on the desk. 'You were hired to save high-level assets, not to save your own skin! Abandoning our directors is an unforgivable insult. You are officially blacklisted.'"
+        "reputation: Syndicate" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+		"your_mission_cooldown_date" = day + 30
+
+# --- Ambush Missions ---
+
+mission "Recovery Standard Syndicate Asset Ambush"
+	invisible
+	to offer
+		"syn_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Rescue Stranded Syndicate Personnel Ambush"
+	invisible
+	to offer
+		"syn_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Recovery Military Syndicate Asset Ambush"
+	invisible
+	to offer
+		"syn_military_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Rescue Military Syndicate Operators Ambush"
+	invisible
+	to offer
+		"syn_military_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Recovery Endgame Syndicate Tech Ambush"
+	invisible
+	to offer
+		"syn_endgame_asset_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1
 
 mission "Rescue Endgame Syndicate Operators Ambush"
 	invisible
@@ -281,8 +329,6 @@ mission "Rescue Endgame Syndicate Operators Ambush"
 		government "Pirate"
 		personality "hunting"
 		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"syn_endgame_rescue_ambush_ready" = 0
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1

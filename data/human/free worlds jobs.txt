@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Free Worlds Asset"
 	name "Salvage Free Worlds Frontier Mineral Cache in <destination>"
-	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> tons from a battered frontier miner in the <destination> system. Payment for returning the cache is 45,000 credits."
+	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> tons from a battered frontier miner in the <destination> system. Drop the cache off at the local spaceport there. Payment is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -15,40 +15,36 @@ mission "Recovery Standard Free Worlds Asset"
 	cargo 10 20 0.7
 	to offer
 		"rr_intro_completed" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Bounder" "Battered Frontier Miner"
-		on board
-			conversation
-				"Your crew winches the dense heavy containment crate into your primary loading bay."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Bounder" "Battered Frontier Miner"
+			on assist
+				"fw_asset_ambush_1_ready" = 1
+				conversation
+					"Your crew winches the dense heavy containment crate into your primary loading bay."
 	on complete
-		"fw_asset_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. Free Worlds quartermasters take custody of the dense containment crate and your loading bay is clear."
+			"You land at the local spaceport. Free Worlds quartermasters take custody of the dense containment crate and your loading bay is clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
 			"The Free Worlds militia command expresses their disappointment regarding the botched frontier recovery operation."
 		"reputation: Free Worlds" -= 0.15
-
-mission "Recovery Standard Free Worlds Asset Ambush"
-	invisible
-	to offer
-		"fw_asset_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"fw_asset_ambush_1_ready" = 0
-
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "The Free Worlds quartermaster shakes his head. 'We needed that cache, and you abandoned your post. I didn't think you were the type to turn tail when things got tough. You've lost our trust.'"
+        "reputation: Free Worlds" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
+		
 mission "Rescue Stranded Free Worlds Militia"
 	name "Rescue Stranded Militia in <destination>"
-	description "A Free Worlds militia scout has been crippled in the <destination> system. You are requested to extract the stranded  personnel so they can rejoin their local garrison. Payment for their safe return is 45,000 credits."
+	description "A Free Worlds militia scout has been crippled in the <destination> system. You are requested to extract the stranded personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -60,41 +56,38 @@ mission "Rescue Stranded Free Worlds Militia"
 		not attributes "uninhabited"
 	to offer
 		"rr_intro_completed" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Bounder" "Battered Militia Scout"
-		on board
-			conversation
-				"Militia members scramble through the airlock into your bunks."
+	
+	on accept
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Bounder" "Battered Militia Scout"
+			on assist
+				"fw_rescue_ambush_1_ready" = 1
+				conversation
+				"Militia members scramble through the airlock into your bunks."		
 	on complete
-		"fw_rescue_ambush_1_ready" = 1
 		conversation
-			"You return to <origin>. The militia members disembark to rejoin their local garrison and your bunks are clear."
+			"You land at the local spaceport. The militia members disembark to rejoin their local garrison and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
 		payment 45000
 	on fail
 		conversation
 			"Free Worlds logistics command marks a failure on your log for failing to secure their stranded personnel."
 		"reputation: Free Worlds" -= 0.15
-
-mission "Rescue Stranded Free Worlds Militia Ambush"
-	invisible
-	to offer
-		"fw_rescue_ambush_1_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates"
-	on complete
-		"fw_rescue_ambush_1_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+        conversation
+            "A militia officer looks at you with weary eyes. 'Those soldiers were counting on us—on you. If you can't be relied upon in the field, maybe the frontier isn't the place for you.'"
+        "reputation: Free Worlds" -= 0.20
+        "reputation: R&R Stranded Ships Operations" -= 0.20
 
 # Mid ones
 mission "Recovery Military Free Worlds Asset"
 	name "Secure Free Worlds Fission Core in <destination>"
-	description "A Free Worlds blockade runner has sustained critical damage in the <destination> system. You are tasked with winching a glowing fission reactor part weighting <cargo> tons aboard before hostiles close in. Payment for securing this military asset is 100,000 credits."
+	description "A Free Worlds blockade runner has sustained critical damage in the <destination> system. You are tasked with winching a glowing fission reactor part weighting <cargo> tons aboard before hostiles close in. Secure it at the local spaceport there. Payment for securing this military asset is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -106,41 +99,37 @@ mission "Recovery Military Free Worlds Asset"
 	cargo 40 70 0.4
 	to offer
 		"rr_mid_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Bastion" "Damaged Militia Blockade Runner"
-		on board
-			conversation
-				"Your engineers winch the glowing reactor part aboard."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Bastion" "Damaged Militia Blockade Runner"
+			on assist
+				"fw_military_asset_ambush_1_ready" = 1
+				conversation
+					"Your engineers winch the glowing reactor part aboard."
+			
 	on complete
-		"fw_asset_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. Free Worlds military technicians swiftly secure the glowing reactor part and your holds are clear."
+			"You arrive safely at the local spaceport. Free Worlds military technicians swiftly secure the glowing reactor part and your holds are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
 	on fail
 		conversation
 			"Free Worlds military officials formally reprimand you for the loss of critical tactical assets."
 		"reputation: Free Worlds" -= 0.20
-
-mission "Recovery Military Free Worlds Asset Ambush"
-	invisible
-	to offer
-		"fw_asset_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"fw_asset_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+	on abort
+        conversation
+            "The commander is livid. 'That tactical asset was crucial to our blockade operations. Aborting now is as good as giving it to the Syndicate. We'll find someone who actually cares about the war effort.'"
+        "reputation: Free Worlds" -= 0.25
+        "reputation: R&R Stranded Ships Operations" -= 0.25
 
 mission "Rescue Military Free Worlds Militia"
 	name "Extract Free Worlds Elite Guard from <destination>"
-	description "Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination> system. Payment for rescuing this elite guard is 100,000 credits."
+	description "Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination> system. Transport them to the local spaceport there. Payment for rescuing this elite guard is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -152,17 +141,19 @@ mission "Rescue Military Free Worlds Militia"
 		not attributes "uninhabited"
 	to offer
 		"rr_mid_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Bastion" "Crippled Militia Command Hull"
-		on board
-			conversation
-				"Battle-worn Free Worlds soldiers carrying heavy tactical gear secure themselves in your hold."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Bastion" "Crippled Militia Command Hull"
+			on assist
+				"fw_military_rescue_ambush_1_ready" = 1
+				conversation
+					"Battle-worn Free Worlds soldiers carrying heavy tactical gear secure themselves in your hold."
+			
 	on complete
-		"fw_rescue_ambush_2_ready" = 1
 		conversation
-			"You arrive safely at <origin>. The battle-worn soldiers disembark to report to local Free Worlds command and your bunks are clear."
+			"You arrive safely at the local spaceport. The battle-worn soldiers disembark to report to local Free Worlds command and your bunks are clear."
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.05
 		payment 100000
@@ -170,24 +161,17 @@ mission "Rescue Military Free Worlds Militia"
 		conversation
 			"The Free Worlds Parliament issues a severe deduction to your reputation for failing to extract their elite guard."
 		"reputation: Free Worlds" -= 0.25
-
-mission "Rescue Military Free Worlds Militia Ambush"
-	invisible
-	to offer
-		"fw_rescue_ambush_2_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-	on complete
-		"fw_rescue_ambush_2_ready" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.25
+	on abort
+        conversation
+            "The militia liaison stares at you, voice cold. 'Those guards are elite veterans. Leaving them behind because the job got hard? You've proven you aren't ready for high-stakes militia contracts.'"
+        "reputation: Free Worlds" -= 0.30
+        "reputation: R&R Stranded Ships Operations" -= 0.30
 
 # Hard ones
 mission "Recovery Endgame Free Worlds Crystals"
 	name "CRITICAL: Salvage Free Worlds Plasma Cache in <destination>"
-	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> tons from a crippled dreadnought in the <destination> system. This plasma cache is vital for stabilizing the local frontier power grid. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> tons from a crippled dreadnought in the <destination> system. Deliver it to the local spaceport there. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -200,45 +184,40 @@ mission "Recovery Endgame Free Worlds Crystals"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Leviathan" "Crippled Free Worlds Dreadnought"
-		on board
-			conversation
-				"Your crew successfully extracts the massive highly volatile crystal crate."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Leviathan" "Crippled Free Worlds Dreadnought"
+			on assist
+				"fw_endgame_asset_ambush_ready" = 1
+				conversation
+					"Your crew successfully extracts the massive highly volatile crystal crate."
+			
 	on complete
-		"fw_endgame_crystals_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. Specialized Free Worlds hazard teams carefully extract the highly volatile crystal cache. 'This stabilizes the local power grid for months, pilot,' the foreman says, 'You’ve done the frontier a great service today.'"
+			"You safely navigate down to the local spaceport. Specialized Free Worlds hazard teams carefully extract the highly volatile crystal cache. 'This stabilizes the local power grid for months, pilot,' the foreman says, 'You’ve done the frontier a great service today.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
 			"The Free Worlds command officer sighs, the transmission crackling with static. 'That asset was vital to our defense of the frontier, pilot. You've failed us when we needed you most. You are grounded until further notice while we re-evaluate your clearance.'"
 		"reputation: Free Worlds" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
-
-mission "Recovery Endgame Free Worlds Crystals Ambush"
-	invisible
-	to offer
-		"fw_endgame_crystals_ambush_ready" == 1
-	deadline 1
-	npc
-		government "Pirate"
-		personality "hunting"
-		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"fw_endgame_crystals_ambush_ready" = 0
+	on abort
+        conversation
+            "The quartermaster is practically shouting. 'That plasma cache was the only thing keeping the lights on in this sector! You’ve doomed thousands to darkness because you were afraid of a few pirates. Get out of our sight.'"
+        "reputation: Free Worlds" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+        "your_mission_cooldown_date" = day + 30
 
 mission "Rescue Endgame Free Worlds Militia"
 	name "CRITICAL: Evacuate Militia Generals in <destination>"
-	description "CRITICAL CONTRACT: An unit of wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination> system. Their survival is essential to the frontier's defense line. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A unit of wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination> system. Evacuate them to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -251,26 +230,93 @@ mission "Rescue Endgame Free Worlds Militia"
 	to offer
 		"your_mission_cooldown_date" <= day
 		"rr_hard_tier_unlocked" == 1
-	npc
-		government "Derelict"
-		personality "derelict" "staying"
-		ship "Leviathan" "Crippled Free Worlds Dreadnought"
-		on board
-			conversation
-				"The main airlock groans under the stress as dozens of wounded militia staff pour onto your decks."
+	on accept	
+		npc
+			government "Derelict"
+			personality "derelict" "staying"
+			ship "Leviathan" "Crippled Free Worlds Dreadnought"
+			on assist
+				"fw_endgame_rescue_ambush_ready" = 1
+				conversation
+					"The main airlock groans under the stress as dozens of wounded militia staff pour onto your decks."
+			
 	on complete
-		"fw_endgame_rescue_ambush_ready" = 1
 		conversation
-			"You safely navigate down to <origin>. Medical teams rush to offload the wounded militia staff. 'You brought back our best, Captain,' the commander salutes, 'These veterans will be back on the line because of you.'"
+			"You safely navigate down to the local spaceport. Medical teams rush to offload the wounded militia staff. 'You brought back our best, Captain,' the commander salutes, 'These veterans will be back on the line because of you.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Free Worlds" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
 		payment 250000
 	on fail
 		conversation
 			"The Free Worlds liaison's voice is tight with rage. 'You were entrusted with the evacuation of our highest-ranking generals, and you failed. Our command has officially declared you a liability. Don't expect any more contracts—you are grounded for the next thirty days.'"
 		"reputation: Free Worlds" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
 		"your_mission_cooldown_date" = day + 30
+	on abort
+        conversation
+            "The Free Worlds Admiral sounds crushed. 'Those generals were our primary tactical link. By abandoning them, you’ve crippled our regional defense. I don't know what I expected from a freelancer, but I expected more than this.'"
+        "reputation: Free Worlds" -= 0.50
+        "reputation: R&R Stranded Ships Operations" -= 0.50
+        "your_mission_cooldown_date" = day + 30
+
+# --- Ambush Missions ---
+
+mission "Recovery Standard Free Worlds Asset Ambush"
+	invisible
+	to offer
+		"fw_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Rescue Stranded Free Worlds Militia Ambush"
+	invisible
+	to offer
+		"fw_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1
+
+mission "Recovery Military Free Worlds Asset Ambush"
+	invisible
+	to offer
+		"fw_military_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Rescue Military Free Worlds Militia Ambush"
+	invisible
+	to offer
+		"fw_military_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+
+mission "Recovery Endgame Free Worlds Crystals Ambush"
+	invisible
+	to offer
+		"fw_endgame_asset_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 2
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1
 
 mission "Rescue Endgame Free Worlds Militia Ambush"
 	invisible
@@ -281,8 +327,6 @@ mission "Rescue Endgame Free Worlds Militia Ambush"
 		government "Pirate"
 		personality "hunting"
 		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"fw_endgame_rescue_ambush_ready" = 0
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1

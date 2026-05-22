@@ -1,6 +1,6 @@
 mission "R&R Operations Introduction"
 	name "Freelancer Contract: Simple Retrieval"
-	description "Dana, a representative of a specialized recovery organization, has contracted you for a seemingly simple retrieval. Proceed to the <waypoints> system and extract a specific tech system from a disabled auxiliary hull. Payment upon successful return to Mars is 25,000 credits."
+	description "Dana, a representative of a specialized recovery organization, has contracted you for a retrieval in the Eteron system. Return to Mars to receive your 25,000 credits."
 	source "Mars"
 	destination "Mars"
 	waypoint "Eteron"
@@ -15,18 +15,18 @@ mission "R&R Operations Introduction"
 				"rr_intro_failed_once" == 1
 			branch "branch_b"
 				"rr_intro_offered" == -1
-			"Hey, my name is Dana. I am a member of an organization that deals in recovering things and rescuing people. I have heard good things about you from some acquaintances. What do you think about doing a little retrieval on a nearby system?"
+			"Hey, my name is Dana. I am a member of an organization that deals in recovering things. What do you think about doing a little retrieval in Eteron?"
 			goto "offer_choice"
 			label "branch_a"
 				"Let's try this again, pilot."
-				goto "offer_choice"
+			goto "offer_choice"
 			label "branch_b"
 				"Are you ready to take the contract now?"
 			label "offer_choice"
 			choice
 				"I can handle that. Lock in the coordinates."
 					accept
-				"Not interested. Find someone else."
+				"Not interested."
 					decline
 
 	on accept
@@ -34,24 +34,32 @@ mission "R&R Operations Introduction"
 		"rr_intro_completed" = 0
 
 	npc
-		system "Eteron"
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Headhunter" "Disabled Auxiliary Hull"
-		on board
+		on assist
+			"rr_intro_ambush_ready" = 1
 			conversation
 				"Your engineering crew managed to get the system requested. Time to go find Dana."
-			"rr_intro_ambush_ready" = 1
 
 	on complete
 		conversation
-			"Dana is waiting for you at the landing pad. When you give her the box containing the system, she smiles and informs you that she looks forward to working with you again."
+			"Dana is waiting for you at the landing pad. When you give her the box, she smiles and informs you that she has more work for you."
 		"rr_intro_completed" = 1
-		payment 25000
-
+		"reputation: R&R Stranded Ships Operations" += 0.02
+		"rr_operations_jobs_done" ++
 	on fail
 		conversation
-			"Dana contacts your terminal."
-		"rr_intro_failed_once" = 1
+			"Dana looks at you with an annoyed face and informs you that you still need to get more experience before getting another shot. You feel a rush of shame watching her go away."
 		"rr_intro_cooldown" = day + 30
-		"rr_intro_offered" = 0
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+
+mission "R&R Intro Ambush"
+	invisible
+	to offer
+		"rr_intro_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Pirate"
+		personality "hunting"
+		fleet "Small Southern Pirates" 1

@@ -1,25 +1,22 @@
 mission "R&R Hard-Tier Emergency"
 	name "Freelancer Contract: High-Security Clearance"
-	description "CRITICAL EMERGENCY: A prototype tech leak threatens to compromise the entire R&R infrastructure. You must immediately jump to <destination> and secure the stability of a failing core aboard a burning Fleet Flagship before it goes critical or falls into the wrong hands. Payment for averting this catastrophe is 350,000 credits and maximum security clearance."
-
+	description "CRITICAL EMERGENCY: A prototype tech leak threatens to compromise the entire R&R infrastructure. Jump to the destination and secure a failing core aboard a burning Fleet Flagship. Return to the source planet to collect your reward."
 	source
 		attributes "human"
 	destination
+		attributes "human"
+	waypoint
 		distance 8 13
 		attributes "human"
 	to offer
 		"rr_hard_tier_unlocked" == 0
 		"rr_hard_cooldown" <= day
 		"rr_mid_tier_unlocked" == 1
-		or
-			and
-				"rr_operations_jobs_done" >= 50
-				"combat rating" >= 100
-			"rr_operations_jobs_done" >= 100
+		"rr_hard_tier_req" = 1
 
 	on offer
 		conversation
-			"Dana's face is pale and frantic. She says she wishes she could offer you a drink, but there is no time. A prototype tech leak just hit the outer rim, and if that core falls into the wrong hands, they will dismantle the entire R&R infrastructure. You are the only one close enough to reach it before they do, and she begs you to move now."
+			"Dana's face is pale and frantic. There is no time. A prototype tech leak just hit the outer rim. You are the only one close enough to reach it, and she begs you to move now."
 			choice
 				"Understood. Jumping to the coordinates."
 					accept
@@ -35,34 +32,33 @@ mission "R&R Hard-Tier Emergency"
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Leviathan" "Burning Fleet Flagship"
-		on board
+		on assist
+			"rr_hard_tier_ambush_ready" = 1
 			conversation
 				"Grab it! The stability is failing—if this goes critical, this whole system is going to be vaporized!"
 
 	on complete
-		"rr_hard_tier_ambush_ready" = 1
 		conversation
 			"Thank God... you've saved us all. I've authorized your highest level of clearance. Good luck out there."
 		"rr_hard_tier_unlocked" = 1
+		"reputation: R&R Stranded Ships Operations" += 0.15
 		"rr_operations_jobs_done" ++
 		payment 350000
 
 	on fail
 		conversation
-			"Dana's expression is grim as she reviews the mission logs. 'The data was lost, pilot. We've taken a significant hit, and I need you to stay out of the field while we perform a full security audit.'"
+			"Dana's expression is grim. 'The data was lost, pilot. We've taken a significant hit, and I need you to stay out of the field while we perform a full security audit.'"
 		"rr_hard_cooldown" = day + 60
 
 mission "R&R Hard-Tier Ambush"
 	invisible
 	to offer
-		"rr_hard_ambush_ready" == 1
+		"rr_hard_tier_ambush_ready" == 1
 	deadline 1
 	npc
 		government "Pirate"
 		personality "hunting"
 		fleet "Small Southern Pirates" 2
-		fleet "Large Southern Pirates"
-		fleet "Small Core Pirates"
-		fleet "Large Core Pirates"
-	on complete
-		"rr_hard_ambush_ready" = 0
+		fleet "Large Southern Pirates" 1
+		fleet "Small Core Pirates" 1
+		fleet "Large Core Pirates" 1
