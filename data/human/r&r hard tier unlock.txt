@@ -6,7 +6,8 @@ mission "R&R Hard-Tier Emergency"
 	destination
 		planet "Ada"
 	waypoint
-		distance 8 13
+		distance 8 13 destination
+	deadline
 	to offer
 		"rr_hard_tier_unlocked" == 0
 		"rr_hard_cooldown" <= day
