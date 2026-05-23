@@ -2,12 +2,11 @@ mission "R&R Hard-Tier Emergency"
 	name "Freelancer Contract: High-Security Clearance"
 	description "CRITICAL EMERGENCY: A prototype tech leak threatens to compromise the entire R&R infrastructure. Jump to the destination and secure a failing core aboard a burning Fleet Flagship. Return to the source planet to collect your reward."
 	source
-		attributes "human"
+		not attributes "uninhabited"
 	destination
-		attributes "human"
+		planet "Ada"
 	waypoint
 		distance 8 13
-		attributes "human"
 	to offer
 		"rr_hard_tier_unlocked" == 0
 		"rr_hard_cooldown" <= day
@@ -29,7 +28,7 @@ mission "R&R Hard-Tier Emergency"
 	passengers 40 20 1
 
 	npc
-		system destination
+		system waypoint
 		government "Derelict"
 		personality "derelict" "staying"
 		ship "Leviathan" "Burning Fleet Flagship"
