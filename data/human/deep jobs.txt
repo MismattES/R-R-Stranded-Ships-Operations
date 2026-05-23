@@ -26,10 +26,9 @@ mission "Recovery Standard Deep Asset"
 			"deep_asset_ambush_1_ready" = 1
 			conversation
 				"Your system techs cut into the primary command node, pulling the black-box data tape. The tech reports the telemetry log is secured, but the drone's anti-tamper security grid has spiked the battery cells and it is going up."
-
 	on complete
 		conversation
-			""The moment your landing gear locks at the spaceport, a squad of Deep Security operatives in unmarked armor boards your ship. They secure the black-box data tape in absolute silence, hand you a certified cred-stick, and depart just as quickly. A text-only message appears on your console: 'Extraction successful. Your discretion is valued, Captain.'"
+			"The moment your landing gear locks at the spaceport, a squad of Deep Security operatives in unmarked armor boards your ship. They secure the black-box data tape in absolute silence, hand you a certified cred-stick, and depart just as quickly. A text-only message appears on your console: 'Extraction successful. Your discretion is valued, Captain.'"
 		"rr_operations_jobs_done" ++
 		"reputation: Deep Security" += 0.01
 		"reputation: R&R Stranded Ships Operations" += 0.01

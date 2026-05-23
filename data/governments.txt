@@ -47,7 +47,7 @@ government "R&R Stranded Ships Operations"
 	language "R&R Tactical Comms"
 	"send untranslated hails"
 
-	raid "R&R Ops Recon Patrol" 8
+	raid "R&R Ops Scouts" 8
 
 government "R&R Ops"
 	color 0.2 0.6 0.9

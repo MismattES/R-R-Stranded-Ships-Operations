@@ -1,0 +1,179 @@
+phrase "R&R Adjective"
+	word
+		"Steadfast "
+		"Resilient "
+		"Vigilant "
+		"Dauntless "
+		"Reliable "
+		"Unwavering "
+		"Constant "
+		"Stalwart "
+		"Dependable "
+		"Indomitable "
+		"Gallant "
+		"Everlasting "
+
+phrase "R&R Noun"
+	word
+		"Savior"
+		"Guardian"
+		"Lifeline"
+		"Beacon"
+		"Sentinel"
+		"Protector"
+		"Anchor"
+		"Bulwark"
+		"Advocate"
+		"Haven"
+		"Vanguard"
+		"Steward"
+
+phrase "R&R Capitolium Escorts Names"
+	word
+		"R&R Capitolium <R&R Adjective><R&R Noun>"
+
+phrase "R&R Scout Adjective"
+	word
+		"Swift "
+		"Alert "
+		"Nimble "
+		"Keen "
+		"Distant "
+
+phrase "R&R Scout Noun"
+	word
+		"Scout"
+		"Sentry"
+		"Watcher"
+		"Seeker"
+		"Pathfinder"
+
+phrase "R&R Scout Fleet Names"
+	word
+		"<R&R Scout Adjective><R&R Scout Noun>"
+	
+phrase "R&R L-X Adj"
+	word
+		"Stealthy "
+		"Rapid "
+		"Sleek "
+		"Covert "
+		"Agile "
+
+phrase "R&R L-X Noun"
+	word
+		"Courier"
+		"Infiltrator"
+		"Ghost"
+		"Runner"
+		"Exfiltrator"
+
+phrase "R&R Light Extraction Names"
+	word
+		"R&R Light <R&R L-X Adj><R&R L-X Noun>"
+
+phrase "R&R H-X Adj"
+	word
+		"Formidable "
+		"Breaching "
+		"Secure "
+		"Relentless "
+		"Ironclad "
+
+phrase "R&R H-X Noun"
+	word
+		"Extraction"
+		"Escort"
+		"Recovery"
+		"Vault"
+		"Citadel"
+
+phrase "R&R Heavy Extraction Fleets Names"
+	word
+		"R&R H-X <R&R H-X Adj><R&R H-X Noun>"
+
+phrase "R&R L-R Adj"
+	word
+		"Swift "
+		"Flash "
+		"Hasty "
+		"Instant "
+		"Rapid "
+
+phrase "R&R L-R Noun"
+	word
+		"Interceptor"
+		"Striker"
+		"Responder"
+		"Reaction"
+		"Vanguard"
+
+phrase "R&R Light Responders Names"
+	word
+		"R&R L-R <R&R L-R Adj><R&R L-R Noun>"
+
+phrase "R&R H-R Adj"
+	word
+		"Thunderous "
+		"Furious "
+		"Dominant "
+		"Aggressive "
+		"Violent "
+
+phrase "R&R H-R Noun"
+	word
+		"Enforcer"
+		"Punisher"
+		"Wrath"
+		"Hammer"
+		"Overwatch"
+
+phrase "R&R Heavy Responders Names"
+	word
+		"R&R H-R <R&R H-R Adj><R&R H-R Noun>"
+	
+phrase "R&R Fighters 1st Part"
+	word
+		"A-"
+		"B-"
+		"C-"
+		"D-"
+		"E-"
+		"F-"
+		"G-"
+		"H-"
+		"I-"
+		"J-"
+		"K-"
+		"L-"
+		"M-"
+		"N-"
+		"O-"
+		"P-"
+		"Q-"
+		"R-"
+		"S-"
+		"T-"
+		"U-"
+		"V-"
+		"W-"
+		"X-"
+		"Y-"
+		"Z-"
+
+phrase "R&R Fighters 2nd Part"
+	word
+		"00"
+		"01"
+		"02"
+		"03"
+		"04"
+		"05"
+		"06"
+		"07"
+		"08"
+		"09"
+	
+phrase "R&R Fighter Names"
+	word
+		"<R&R Fighters 1st Part><R&R Fighters 2nd Part>"

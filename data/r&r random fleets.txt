@@ -1,37 +1,145 @@
-fleet "R&R Ops Heavy Response"
+fleet "R&R Capitolium Escort"
 	government "R&R Stranded Ships Operations"
-	variant
-		"Leviathan" 1
-		"Argosy" 2
+	names "R&R Capitolium Escorts Names"
+	personality forbearing opportunistic quiet disables
+	fighters
+		names "R&R Fighter Names"
+		personality heroic opportunistic disables
+	variant 100
+		"Solifuge" 4
+			fighters "Far Osk 27" 24
+		"Albatross" 2
+		"Bactrian" 2
+			fighters "Far Osk 27" 6
 
-
-fleet "R&R Ops Recon Patrol"
+fleet "R&R Ops Scouts"
 	government "R&R Stranded Ships Operations"
-	variant
+	names "R&R Scout Fleet Names"
+	personality pacifist
+	variant 50
+		"Hawk" 1
+		"Wasp" 2
+	variant 50
+		"Hawk" 1
+		"Fury" 2
+		
+fleet "R&R Ops L-X Division"
+	government "R&R Stranded Ships Operations"
+	names "R&R Light Extraction Names"
+	personality forbearing timid opportunistic disables
+	variant 35
+		"Headhunter" 1
 		"Hawk" 2
+		"Wasp" 4
+	variant 35
+		"Gunboat" 1
+		"Fury" 2
+		"Sparrow" 4
+	variant 30
+		"Raven" 1
+		"Hawk" 1
+		"Fury" 1
+		"Wasp" 2
 		"Sparrow" 2
-
-government "Derelict 2"
-	color 0.5 0.5 0.5
-
+		
+fleet "R&R Ops H-X Division"
+	government "R&R Stranded Ships Operations"
+	names "R&R Heavy Extraction Fleets Names"
+	personality forbearing timid opportunistic disables
+	variant 50
+		"Osprey" 1
+		"Manta" 2
+		"Corvette" 2
+	variant 50
+		"Frigate" 1
+		"Firebird" 2
+		"Splinter" 2
+		
+fleet "R&R Ops L-R Division"
+	government "R&R Stranded Ships Operations"
+	names "R&R Light Responders Names"
+	personality heroic hunting opportunistic disables
+	fighters
+		names "R&R Fighter Names"
+		personality heroic opportunistic disables
+	variant 50
+		"Falcon" 1
+		"Osprey" 2
+		"Firebird" 2
+	variant 50
+		"Kestrel" 1
+			fighters "Far Osk 27" 2
+		"Manta" 2
+		"Corvette" 2
+	
+fleet "R&R Ops H-R Division"
+	government "R&R Stranded Ships Operations"
+	names  "R&R Heavy Responders Names"
+	personality heroic hunting opportunistic disables
+	fighters
+		names "R&R Fighter Names"
+		personality heroic opportunistic disables
+	variant
+		"Carrier" 2
+			fighters "Far Osk 27" 16
+		"Cruiser" 4
+		"Kestrel" 4
+			fighters "Far Osk 27" 8
+		"Falcon" 4
+		"Osprey" 8
+		
 mission "R&R Regional Spawner Recon"
 	invisible
 	repeat
 	entering
-	source
-		government "Republic" "Syndicate" "Free Worlds" "Independent" "Pirate" "Pirate Anarchists" "Militia" "Deep Security"
 	to offer
 		random < 75
 	npc
-		fleet "R&R Ops Recon Patrol"
+		fleet "R&R Ops Scouts"
 
-mission "R&R Regional Spawner Heavy"
+mission "R&R Regional Spawner L-X"
 	invisible
 	repeat
 	entering
-	source
-		government "Republic" "Syndicate" "Free Worlds" "Independent" "Pirate" "Pirate Anarchists" "Militia" "Deep Security"
 	to offer
-		random < 10
+		random < 50
 	npc
-		fleet "R&R Ops Heavy Response"
+		fleet "R&R Ops L-X Division"
+
+mission "R&R Regional Spawner H-X"
+	invisible
+	repeat
+	entering
+	to offer
+		random < 30
+	npc
+		fleet "R&R Ops H-X Division"
+		
+mission "R&R Capitolium"
+	invisible
+	repeat
+	entering
+	to offer
+		random < 3
+	npc
+		government "R&R Stranded Ships Operations" 
+		personality uninterested marked forbearing opportunistic quiet disables
+		ship "Quarg Hydra" "Finality's Extractor"
+		fleet "R&R Capitolium Escort" 
+
+mission "R&R Distress Beacon Trigger"
+	invisible
+	repeat
+	boarding
+	source
+		government "R&R Stranded Ships Operations"
+	to offer
+		random < 100
+	npc
+		personality hunting
+		fleet "R&R Ops H-R Division"
+		fleet "R&R Ops L-R Division"
+		fleet "R&R Ops L-R Division"
+
+government "Derelict 2"
+	color 0.5 0.5 0.5
