@@ -15,6 +15,7 @@ mission "Recovery Standard Free Worlds Asset"
 	cargo 10 20 0.7
 	deadline
 	to offer
+		has "event: start of hostilities"
 		"rr_intro_completed" == 1
 
 	npc
@@ -58,6 +59,7 @@ mission "Rescue Stranded Free Worlds Militia"
 		not attributes "uninhabited"
 	deadline
 	to offer
+		has "event: start of hostilities"
 		"rr_intro_completed" == 1
 
 	npc
