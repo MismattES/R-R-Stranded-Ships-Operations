@@ -14,7 +14,7 @@ mission "R&R Mid Tier Requirement Monitor"
 		or
 			and
 				"rr_operations_jobs_done" >= 20
-				"combat rating" >= 40
+				"combat rating" >= 403
 			"rr_operations_jobs_done" >= 40
 	on offer
 		"rr_mid_tier_req" = 1
@@ -23,10 +23,11 @@ mission "R&R Hard Tier Requirement Monitor"
 	invisible
 	repeat
 	to offer
+		"rr_mid_tier_unlocked" == 1
 		or
 			and
 				"rr_operations_jobs_done" >= 50
-				"combat rating" >= 100
+				"combat rating" >= 8103
 			"rr_operations_jobs_done" >= 100
 	on offer
 		"rr_hard_tier_req" = 1
