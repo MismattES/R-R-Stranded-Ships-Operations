@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Free Worlds Asset"
 	name "Salvage Free Worlds Frontier Mineral Cache in <destination>"
-	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> from a battered frontier miner in the <destination>. Drop the cache off at the local spaceport there. Payment is 45,000 credits."
+	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> from a battered frontier miner in the <destination>. Drop the cache off at the local spaceport there. Payment is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -47,7 +47,7 @@ mission "Recovery Standard Free Worlds Asset"
 
 mission "Rescue Stranded Free Worlds Militia"
 	name "Rescue Stranded Militia in <destination>"
-	description "A Free Worlds militia scout has been crippled in the <destination>. You are requested to extract the <passengers> stranded personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A Free Worlds militia scout has been crippled in the <destination>. You are requested to extract the <passengers> stranded personnel and drop them off safely at the local spaceport there. Payment for their safe return is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -92,7 +92,7 @@ mission "Rescue Stranded Free Worlds Militia"
 # Mid ones
 mission "Recovery Military Free Worlds Asset"
 	name "Secure Free Worlds Fission Core in <destination>"
-	description "A Free Worlds blockade runner has sustained critical damage in the <destination>. You are tasked with winching a glowing fission reactor part weighting <cargo> aboard before hostiles close in. Secure it at the local spaceport there. Payment for securing this military asset is 100,000 credits."
+	description "A Free Worlds blockade runner has sustained critical damage in the <destination>. You are tasked with winching a glowing fission reactor part weighting <cargo> aboard before hostiles close in. Secure it at the local spaceport there. Payment for securing this military asset is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -137,7 +137,7 @@ mission "Recovery Military Free Worlds Asset"
 
 mission "Rescue Military Free Worlds Militia"
 	name "Extract Free Worlds Elite Guard from <destination>"
-	description "<passengers> Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination>. Transport them to the local spaceport there. Payment for rescuing this elite guard is 100,000 credits."
+	description "<passengers> Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination>. Transport them to the local spaceport there. Payment for rescuing this elite guard is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -182,7 +182,7 @@ mission "Rescue Military Free Worlds Militia"
 # Hard ones
 mission "Recovery Endgame Free Worlds Crystals"
 	name "CRITICAL: Salvage Free Worlds Plasma Cache in <destination>"
-	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> from a crippled dreadnought in the <destination>. Deliver it to the local spaceport there. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> from a crippled dreadnought in the <destination>. Deliver it to the local spaceport there. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -231,7 +231,7 @@ mission "Recovery Endgame Free Worlds Crystals"
 
 mission "Rescue Endgame Free Worlds Militia"
 	name "CRITICAL: Evacuate Militia Generals in <destination>"
-	description "CRITICAL CONTRACT: A unit of <passengers> wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination>. Evacuate them to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A unit of <passengers> wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination>. Evacuate them to the local spaceport there. Payment for this endgame evacuation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000

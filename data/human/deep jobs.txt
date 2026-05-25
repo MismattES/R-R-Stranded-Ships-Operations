@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Deep Asset"
 	name "Secure Deep Security Sensor Core in <destination>"
-	description "Deep Security Intelligence requires a discreet captain to recover a classified black-box data tape weighting <cargo> from a wrecked vessel in the <destination>. Drop the drive off at the local spaceport there. Be advised that anti-tamper security grids may be active. Payment for successful extraction is 45,000 credits."
+	description "Deep Security Intelligence requires a discreet captain to recover a classified black-box data tape weighting <cargo> from a wrecked vessel in the <destination>. Drop the drive off at the local spaceport there. Be advised that anti-tamper security grids may be active. Payment for successful extraction is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -46,7 +46,7 @@ mission "Recovery Standard Deep Asset"
 
 mission "Rescue Stranded Deep Security Agents"
 	name "Rescue Stranded Deep Agents in <destination>"
-	description "Deep Security requires an immediate, silent extraction of <passengers> undercover agents stranded aboard a classified wreck in the <destination>. Drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "Deep Security requires an immediate, silent extraction of <passengers> undercover agents stranded aboard a classified wreck in the <destination>. Drop them off safely at the local spaceport there. Payment for their safe return is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -90,7 +90,7 @@ mission "Rescue Stranded Deep Security Agents"
 # Mid ones
 mission "Recovery Military Deep Security Asset"
 	name "Retrieve Deep Security Black Box in <destination>"
-	description "A Deep Observer has been disabled in the <destination>. You are contracted to rip the hidden terminal weighting <cargo> from its command console before pirate interception fleets arrive. Secure it at the local spaceport there. Payment for securing this military intelligence is 100,000 credits."
+	description "A Deep Observer has been disabled in the <destination>. You are contracted to rip the hidden terminal weighting <cargo> from its command console before pirate interception fleets arrive. Secure it at the local spaceport there. Payment for securing this military intelligence is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -134,7 +134,7 @@ mission "Recovery Military Deep Security Asset"
 
 mission "Rescue Military Deep Security Agents"
 	name "Secure Deep Security Fleet Core in <destination>"
-	description "<passengers> Commanders carrying unlisted Deep Security insignia require emergency extraction from a classified Vanguard wreck in the <destination>. Total radio silence is mandated. Transport them to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
+	description "<passengers> Commanders carrying unlisted Deep Security insignia require emergency extraction from a classified Vanguard wreck in the <destination>. Total radio silence is mandated. Transport them to the local spaceport there. Payment for this mid-tier extraction is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -179,7 +179,7 @@ mission "Rescue Military Deep Security Agents"
 # Hard ones
 mission "Recovery Endgame Deep Security Core"
 	name "CRITICAL: Salvage Deep Security Singularity Core in <destination>"
-	description "CRITICAL CONTRACT: Extract a dangerously unstable singularity mechanism weighting <cargo> from a ruined Deep Security fortress in the <destination>. The derelict's gravity containment is collapsing, and heavy raider warships are tracking the beacon. Deliver it to the local spaceport there. Failure will result in severe license penalties. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Extract a dangerously unstable singularity mechanism weighting <cargo> from a ruined Deep Security fortress in the <destination>. The derelict's gravity containment is collapsing, and heavy raider warships are tracking the beacon. Deliver it to the local spaceport there. Failure will result in severe license penalties. Payment for this endgame salvage operation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -226,7 +226,7 @@ mission "Recovery Endgame Deep Security Core"
 
 mission "Rescue Endgame Deep Security Agents"
 	name "CRITICAL: Evacuate Deep Intelligence Directors in <destination>"
-	description "CRITICAL CONTRACT: A Deep Security black-site in the <destination> system has been compromised. You must evacuate <passengers> top-tier Intelligence Directors under heavy fire to the local spaceport there. Losing these assets will result in a kill order on your file. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A Deep Security black-site in the <destination> system has been compromised. You must evacuate <passengers> top-tier Intelligence Directors under heavy fire to the local spaceport there. Losing these assets will result in a kill order on your file. Payment for this endgame evacuation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000

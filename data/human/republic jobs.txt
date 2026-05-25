@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Republic Asset"
 	name "Recover Republic Railgun Prototype in <destination>"
-	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> and extract its dense magnetic rails weighting <cargo>. Drop the prototype off at the local spaceport there. Payment for returning the prototype is 45,000 credits."
+	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> and extract its dense magnetic rails weighting <cargo>. Drop the prototype off at the local spaceport there. Payment for returning the prototype is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -47,7 +47,7 @@ mission "Recovery Standard Republic Asset"
 
 mission "Rescue Stranded Republic Soldiers"
 	name "Rescue Stranded Republic Crew in <destination>"
-	description "A Republic Navy vessel is stranded in the <destination>. You are to extract the crew of <passengers> and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A Republic Navy vessel is stranded in the <destination>. You are to extract the crew of <passengers> and drop them off safely at the local spaceport there. Payment for their safe return is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -92,7 +92,7 @@ mission "Rescue Stranded Republic Soldiers"
 # Mid ones
 mission "Recovery Military Republic Asset"
 	name "Retrieve Republic Routing Matrix in <destination>"
-	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> from a battered fleet hull in the <destination>. Secure it at the local spaceport there. Payment for securing this military comm hub is 100,000 credits."
+	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> from a battered fleet hull in the <destination>. Secure it at the local spaceport there. Payment for securing this military comm hub is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -137,7 +137,7 @@ mission "Recovery Military Republic Asset"
 
 mission "Rescue Military Republic Soldiers"
 	name "Extract Republic Infantry from <destination>"
-	description "A platoon of <passengers> Republic heavy infantry is trapped aboard a battered fleet hull in the <destination>. You are tasked with their immediate evacuation to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
+	description "A platoon of <passengers> Republic heavy infantry is trapped aboard a battered fleet hull in the <destination>. You are tasked with their immediate evacuation to the local spaceport there. Payment for this mid-tier extraction is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -183,7 +183,7 @@ mission "Rescue Military Republic Soldiers"
 # Hard ones
 mission "Recovery Endgame Republic Core"
 	name "CRITICAL: Extract Republic Antimatter Engine from <destination>"
-	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> from a burning Fleet Flagship in the <destination>. Deliver it to the local spaceport there. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> from a burning Fleet Flagship in the <destination>. Deliver it to the local spaceport there. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -232,7 +232,7 @@ mission "Recovery Endgame Republic Core"
 
 mission "Rescue Endgame Republic Soldiers"
 	name "CRITICAL: Evacuate Fleet Command Staff from <destination>"
-	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination>. You must evacuate <passengers> of highly valuable Fleet Command staff under heavy enemy fire to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination>. You must evacuate <passengers> of highly valuable Fleet Command staff under heavy enemy fire to the local spaceport there. Payment for this endgame evacuation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000

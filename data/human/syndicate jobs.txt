@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Syndicate Asset"
 	name "Recover Syndicate Cybernetic Core from <destination>"
-	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> from a disabled asset in the <destination>. Drop the core off at the local spaceport there. Payment for returning the cybernetic core is 45,000 credits."
+	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> from a disabled asset in the <destination>. Drop the core off at the local spaceport there. Payment for returning the cybernetic core is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -47,7 +47,7 @@ mission "Recovery Standard Syndicate Asset"
 
 mission "Rescue Stranded Syndicate Personnel"
 	name "Rescue Stranded Corporate Crew in <destination>"
-	description "A corporate transport has been disabled in the <destination>. You are to retrieve the <passengers> stranded corporate personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A corporate transport has been disabled in the <destination>. You are to retrieve the <passengers> stranded corporate personnel and drop them off safely at the local spaceport there. Payment for their safe return is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -92,7 +92,7 @@ mission "Rescue Stranded Syndicate Personnel"
 # Mid ones
 mission "Recovery Military Syndicate Asset"
 	name "Salvage Corporate Tech in <destination>"
-	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> from a scuttled Syndicate transport in the <destination>. Secure it at the local spaceport there. Payment for salvaging this corporate tech is 100,000 credits."
+	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> from a scuttled Syndicate transport in the <destination>. Secure it at the local spaceport there. Payment for salvaging this corporate tech is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -137,7 +137,7 @@ mission "Recovery Military Syndicate Asset"
 
 mission "Rescue Military Syndicate Operators"
 	name "Secure Syndicate Black-Ops Asset in <destination>"
-	description "A team of <passengers> uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination>. Transport them to the local spaceport there. Payment for securing this black-ops asset is 100,000 credits."
+	description "A team of <passengers> uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination>. Transport them to the local spaceport there. Payment for securing this black-ops asset is 225,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -183,7 +183,7 @@ mission "Rescue Military Syndicate Operators"
 # Hard ones
 mission "Recovery Endgame Syndicate Tech"
 	name "CRITICAL: Salvage Syndicate AI Logic Core in <destination>"
-	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm weighting <cargo> aboard a ruined corporate super-freighter in the <destination>. Deliver it to the local spaceport there. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm weighting <cargo> aboard a ruined corporate super-freighter in the <destination>. Deliver it to the local spaceport there. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -232,7 +232,7 @@ mission "Recovery Endgame Syndicate Tech"
 
 mission "Rescue Endgame Syndicate Operators"
 	name "CRITICAL: Evacuate Corporate Executives in <destination>"
-	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> holds a crew of <passengers> panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them to the local spaceport there before rival elements arrive. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> holds a crew of <passengers> panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them to the local spaceport there before rival elements arrive. Payment for this endgame evacuation is 375,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
