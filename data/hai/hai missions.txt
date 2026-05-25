@@ -1,0 +1,93 @@
+# Hai jobs unlock Arc
+
+mission "R&R: Hai Summons"
+	invisible
+	to offer
+		has "event: met hai"
+		"reputation: Hai" >= 100
+		"rr_hard_jobs_done" >= 5
+		"hai_arc_summons_offered" == 0
+		
+	on offer
+		conversation
+			"As you access the local spaceport network, your terminal overrides standard protocols. A highly encrypted R&R comms channel opens, and Dana's face appears."
+			"'Captain, keep this channel strictly confidential. We have a situation. Because you've managed to earn the trust of the Hai, they've come to us with a critical problem, and they requested you by name.'"
+			"'I can't discuss the details over an open network, but it is extremely sensitive. Get to the R&R Headquarters on Ada immediately. We'll be waiting in a secure conference room.'"
+			choice
+				"Done."
+					accept
+				
+	on accept
+		"hai_arc_summons_offered" = 1
+		
+	destination "Ada"
+	name "Report to R&R HQ on Ada"
+	description "Dana has contacted you via a secure channel. The Hai have requested you by name for a highly sensitive R&R contract. Meet her at the R&R Headquarters on Ada."
+	
+	on complete
+		"hai_arc_ready" = 1
+		
+mission "R&R: Hai Rescue Ehma Ti"
+	name "CRITICAL: Rescue Hai Researchers in Ehma Ti"
+	description "Extract 10 Hai cultural researchers from a compromised, disabled stealth vessel in the Unfettered system of Ehma Ti. Deliver them securely to Hai-home."
+	source
+		planet "Ada"
+	destination
+		planet "Hai-home"
+	waypoint
+		system "Ehma Ti"
+	passengers 10
+	
+	to offer
+		"hai_arc_ready" == 1
+		
+	on offer
+		conversation
+			"Dana meets you at the landing pad and escorts you directly to a heavily shielded conference room deep within R&R Headquarters. Three Hai representatives are waiting inside, their posture rigid with anxiety."
+			"Dana locks the door. 'Captain, I'll let our clients explain.'"
+			"The lead Hai steps forward, their voice trembling through the translator. 'We sent a team of ten cultural researchers to the Ehma Ti system to observe the Unfettered. They were aboard a vessel equipped with experimental cloaking technology. It was meant to be entirely undetectable.'"
+			"'Was.' Dana adds grimly."
+			"'The cloak failed,' the Hai continues, visibly distressed. 'Their ship is now disabled and exposed in the heart of Unfettered territory. Unfettered warships are already closing in on their beacon.'"
+			"The Hai steps closer, eyes wide with terror. 'If the Unfettered capture them, they will be tortured. They will extract our defensive codes, our blind spots, and the exact coordinates of our border patrols. It would mean total war, and we are not ready. You must get them out.'"
+			choice
+				"I will leave immediately. Consider it done."
+					accept
+				"This sounds too hot for me. Find someone else."
+					decline
+				
+	on accept
+		"hai_arc_ready" = 0
+		"hai_arc_rescue_1_started" = 1
+
+	npc
+		system "Ehma Ti"
+		government "Hai"
+		personality "derelict" "staying"
+		ship "Centipede" "Disabled Stealth Vessel"
+		on assist
+			"hai_ehma_ti_ambush_ready" = 1
+			conversation
+				"You lock onto the disabled vessel's airlock. Ten terrified Hai researchers scramble onto your ship. The last one through the hatch slams the lock shut. 'Go! They are breaking formation and coming right for us!'"
+				
+	on complete
+		conversation
+			"The moment your ship touches down on Hai-home, a squad of Hai security personnel silently surrounds your vessel. The traumatized researchers disembark, immediately guided away by medical staff."
+			"A Hai official approaches your cockpit, bowing deeply. 'You have averted a catastrophe that could have ended our peaceful existence, Captain. We owe you a debt that credits can barely cover... but we will try. Your silence on this matter is paramount.'"
+		payment 350000
+		"reputation: Hai" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.10
+		"rr_operations_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"hai_arc_rescue_completed" = 1
+		
+	on fail
+		conversation
+			"Dana’s voice comes through the comms, cold and completely hollow. 'The researchers' biosignals just went flat. The Unfettered took them. You have no idea what you've just unleashed, Captain. The Hai are in total panic. Do not return to this sector.'"
+		"reputation: Hai" -= 0.60
+		"reputation: R&R Stranded Ships Operations" -= 0.30
+
+	on abort
+		conversation
+			"The Hai representative's voice crackles over your comms, breaking with pure terror and rage. 'You are abandoning them?! You are leaving our people to the Unfettered?! You have doomed us all! You are no longer welcome in our space!'"
+		"reputation: Hai" -= 0.80
+		"reputation: R&R Stranded Ships Operations" -= 0.50

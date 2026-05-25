@@ -1,0 +1,25 @@
+mission "R&R: Remnant General Landing Lock"
+	invisible
+	repeat
+	source
+		government "Remnant"
+		not planet "Cartaegusa"
+	to offer
+		"rr_remnant_unlocked" == 1
+		"rr_remnant_full_clearance" == 0 
+	on offer
+		conversation
+			"As your ship breaches the upper atmosphere, your comms array is hijacked by a highly aggressive, automated signal."
+			"'WARNING. Unauthorized vessel detected. Landing clearance denied. Depart this airspace immediately or you will be fired upon.'"
+			"Before you can even respond, your ship's automated collision-avoidance system is externally triggered, forcing your thrusters to fire and ejecting you back into orbit."
+
+mission "R&R: Cartaegusa Landing Lock"
+	invisible
+	repeat
+	source
+		planet "Cartaegusa"
+	to offer
+		"rr_cartaegusa_clearance" == 0 
+	on offer
+		conversation
+			"Cartaegusa Traffic Control: 'You are not cleared for approach. Alter your vector immediately.'"

@@ -1,0 +1,372 @@
+# Hai Recovery and Rescue Jobs
+
+# Easy ones
+mission "Recovery Standard Hai Asset"
+	name "Secure Hai Sensor Pods in <waypoint>"
+	description "A stealth probe monitoring the Unfettered borders has been disabled in the <waypoint>. The Hai cannot risk sending an official military vessel. You are contracted to retrieve the ecological sensor logs weighting <cargo> and deliver them quietly to the spaceport in <destination>. Payment for successful extraction is 90,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	cargo 10 20 0.7
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Geochelone" "Disabled Stealth Probe"
+		on assist
+			"hai_asset_ambush_1_ready" = 1
+			conversation
+				"Your techs carefully detach the stealth sensor pods. As the data finishes transferring, proximity alarms blare—Unfettered patrols have noticed the energy signature of your extraction gear."
+	on complete
+		conversation
+			"You land softly at the spaceport. A small group of Hai researchers quickly approaches, their fur ruffled with visible anxiety. They take the sensor pods and immediately begin checking the encryption seals."
+			"'Thank you, Captain,' one whispers, eyes darting around the hangar. 'If our Unfettered cousins or your human authorities found this data, the consequences for our peaceful society would be devastating. Your discretion is deeply appreciated.'"
+		"rr_operations_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
+		payment 90000
+	on fail
+		conversation
+			"A panicked Hai official contacts you over a heavily encrypted line. 'The data is lost? You do not understand what you have done. The Unfettered will use those logs to find our blind spots! Please, leave our space.'"
+		"reputation: Hai" -= 0.15
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+		conversation
+			"The Hai liaison shakes their head slowly on the monitor. 'You gave us your word, and then you abandoned the mission. Humans are as unpredictable as the Unfettered. We cannot rely on you.'"
+		"reputation: Hai" -= 0.20
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+
+mission "Rescue Stranded Hai Naturalists"
+	name "Rescue Hai Naturalists in <waypoint>"
+	description "A small group of <passengers> Hai naturalists studying planetary fauna became stranded in the <waypoint> when their ship's drive failed. You must extract them before Unfettered raiding parties capture them, and return them to <destination>. Payment is 90,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	passengers 10 15 0.7
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Centipede" "Disabled Researcher Vessel"
+		on assist
+			"hai_rescue_ambush_1_ready" = 1
+			conversation
+				"The terrified Hai naturalists scramble through the airlock, clutching data-pads and trembling. One of them points out the viewport as Unfettered ships drop into the system on an intercept course."
+	on complete
+		conversation
+			"The naturalists almost collapse with relief as they step onto the landing pad at the spaceport. A Hai elder meets them, offering a gesture of profound gratitude to you."
+			"'Our tenets teach us the value of all life, Captain. You have saved our scholars from a terrible fate at the hands of those who have forgotten our ways. We have transferred your credits.'"
+		"rr_operations_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.01
+		"reputation: R&R Stranded Ships Operations" += 0.01
+		payment 90000
+	on fail
+		conversation
+			"The Hai elder's voice breaks with sorrow. 'The scholars were taken. The Unfettered know no mercy. We trusted a human, and our people paid the price.'"
+		"reputation: Hai" -= 0.15
+		"reputation: R&R Stranded Ships Operations" -= 0.15
+	on abort
+		conversation
+			"Dana contacts you, sounding frustrated. 'The Hai just severed their contract with us for this sector. You left civilians to be captured by warmongers. That’s a black mark you won't easily erase.'"
+		"reputation: Hai" -= 0.20
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+
+# Mid ones
+mission "Recovery Military Hai Asset"
+	name "Retrieve Experimental Cloak Core in <waypoint>"
+	description "The Unfettered have shot down a covert Hai observer in the <waypoint>. The ship carried an experimental stealth generator weighting <cargo>. You must salvage the core and return it to <destination> before it is reverse-engineered. Payment is 200,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	cargo 40 70 0.4
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Shield Bug" "Downed Hai Observer"
+		on assist
+			"hai_military_asset_ambush_1_ready" = 1
+			conversation
+				"Your crew successfully cuts through the bulkhead and secures the heavy, humming stealth generator. As it is brought aboard, your scanners detect multiple Unfettered tracking pings locking onto your ship."
+	on complete
+		conversation
+			"Hai military liaisons quietly surround your ship at the spaceport, immediately draping the stealth generator in dampening mesh."
+			"'If the Unfettered had recovered this, or if your Republic discovered we possessed such technology, it would invite a war we cannot win,' the liaison says solemnly. 'You have preserved the balance today. Your payment is secure.'"
+		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
+		payment 200000
+	on fail
+		conversation
+			"The Hai liaison stares at you with a mix of fear and anger. 'The cloaking core is in the hands of the Unfettered. You have doomed our border patrols to slaughter. Do not contact us again.'"
+		"reputation: Hai" -= 0.20
+		"reputation: R&R Stranded Ships Operations" -= 0.20
+	on abort
+		conversation
+			"Dana’s transmission is terse. 'The Hai are officially locking down their borders. You aborted a critical tech recovery, and they are panicking. This sets our operations back significantly.'"
+		"reputation: Hai" -= 0.25
+		"reputation: R&R Stranded Ships Operations" -= 0.25
+
+mission "Rescue Military Hai Agents"
+	name "Extract Hai Border Guards in <waypoint>"
+	description "A crippled Hai border patrol vessel in the <waypoint> is surrounded by Unfettered territory. <passengers> border guards need emergency extraction to <destination> before their life support fails or they are boarded. Payment is 200,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	passengers 20 40 0.4
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Beetle" "Crippled Border Patrol"
+		on assist
+			"hai_military_rescue_ambush_1_ready" = 1
+			conversation
+				"The exhausted Hai border guards stagger aboard, their armor scorched by plasma fire. The captain of the guard orders you to spool your hyperdrive immediately—Unfettered warships are returning to finish the job."
+	on complete
+		conversation
+			"As the guards disembark at the spaceport, they are greeted by their families and local elders. The guard captain pauses at your airlock and places a hand over their heart."
+			"'We expected to die out there in the cold. You risked the wrath of the Unfettered for outsiders you barely know. The Hai will not forget your courage, human.'"
+		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.05
+		"reputation: R&R Stranded Ships Operations" += 0.05
+		payment 200000
+	on fail
+		conversation
+			"A solemn Hai elder addresses you. 'Our guards fought bravely, but without your extraction, they were overwhelmed. We mourn their loss, and we mourn the trust we placed in you.'"
+		"reputation: Hai" -= 0.25
+		"reputation: R&R Stranded Ships Operations" -= 0.25
+	on abort
+		conversation
+			"The elder's voice is frigid. 'To abandon warriors who were holding the line for our safety is a cowardice we do not understand. You are forbidden from accepting further contracts from our people.'"
+		"reputation: Hai" -= 0.30
+		"reputation: R&R Stranded Ships Operations" -= 0.30
+
+# Hard ones
+mission "Recovery Endgame Hai Core"
+	name "CRITICAL: Salvage Quantum Keystone Matrix in <waypoint>"
+	description "CRITICAL CONTRACT: A massive Hai flagship suffered a catastrophic anomaly in the <waypoint>. You must extract its volatile Quantum Keystone Matrix, weighting <cargo>, and return it to <destination>. If the Unfettered capture this, they will have limitless jump capabilities. Payment is 500,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	cargo 110 150 0.15
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+		"your_mission_cooldown_date" <= day
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Roost" "Crippled Hai Flagship"
+		on assist
+			"hai_endgame_asset_ambush_ready" = 1
+			conversation
+				"Sparks shower your cargo bay as your heavy lifters secure the glowing Quantum Keystone Matrix. The massive energy spike acts as a beacon, drawing an overwhelming Unfettered armada directly to your coordinates."
+	on complete
+		conversation
+			"The spaceport is entirely locked down. Elite Hai guards secure the Keystone Matrix the moment your ramp lowers. A high-ranking elder, usually reserved, grasps your hands firmly."
+			"'You have kept the wormhole safe, and by extension, you have protected both our world and the human worlds from an Unfettered invasion. Your mastery of the void is a gift. Thank you.'"
+		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
+		"your_mission_cooldown_date" = day + 15
+		payment 500000
+	on fail
+		conversation
+			"The Hai elder is pale, their voice a whisper. 'The Matrix was taken. The Unfettered now have the means to cross the boundaries of our space. You have unleashed a terror we cannot contain. Get out.'"
+		"reputation: Hai" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
+		"your_mission_cooldown_date" = day + 30
+	on abort
+		conversation
+			"Dana contacts you on a red-alert channel. 'You abandoned the Keystone Matrix? The Unfettered just salvaged it. The Hai are in a state of absolute panic and have blacklisted R&R from all their systems. You really blew it this time.'"
+		"reputation: Hai" -= 0.50
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"your_mission_cooldown_date" = day + 30
+
+mission "Rescue Endgame Hai Agents"
+	name "CRITICAL: Evacuate Peace Envoy in <waypoint>"
+	description "CRITICAL CONTRACT: A desperate attempt at diplomacy has failed. <passengers> high-ranking Hai elders and diplomats are trapped aboard a burning convoy in the <waypoint>. Evacuate them to <destination> under heavy fire. Payment is 500,000 credits."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		attributes "hai"
+		not attributes "unfettered"
+	waypoint
+		attributes "unfettered"
+	destination
+		attributes "hai"
+		not attributes "unfettered"
+	passengers 60 90 0.15
+	deadline
+	to offer
+		"hai_arc_rescue_completed" == 1
+		"your_mission_cooldown_date" <= day
+
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Roost" "Burning Diplomatic Convoy"
+		on assist
+			"hai_endgame_rescue_ambush_ready" = 1
+			conversation
+				"Dozens of wounded Hai diplomats and elders flood into your ship, their ceremonial robes burned and torn. 'The Unfettered do not want peace,' one elder gasps. 'Fly, human. They are coming to finish the slaughter.'"
+	on complete
+		conversation
+			"Medical teams rush the spaceport tarmac as you touch down. The surviving elders are carefully offloaded. One of the lead diplomats stops to address you, bowing deeply despite their injuries."
+			"'We sought to mend the rift with our cousins, but found only madness. You dove into that madness and brought us back to the light. The Hai will forever consider you a protector of our people.'"
+		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
+		"rr_hai_jobs_done" ++
+		"reputation: Hai" += 0.15
+		"reputation: R&R Stranded Ships Operations" += 0.15
+		"your_mission_cooldown_date" = day + 15
+		payment 500000
+	on fail
+		conversation
+			"The grief in the Hai elder's voice is absolute. 'Our finest minds, our peacemakers... all slaughtered. We trusted you with the soul of our society, and you failed us. You are dead to the Hai.'"
+		"reputation: Hai" -= 0.40
+		"reputation: R&R Stranded Ships Operations" -= 0.40
+		"your_mission_cooldown_date" = day + 30
+	on abort
+		conversation
+			"Dana's expression is furious. 'You left a diplomatic envoy to be butchered by the Unfettered? R&R is officially burning your clearance in this sector. Do not show your face here again.'"
+		"reputation: Hai" -= 0.50
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"your_mission_cooldown_date" = day + 30
+
+# --- Ambush Missions ---
+
+mission "Recovery Standard Hai Asset Ambush"
+	invisible
+	to offer
+		"hai_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 2
+
+mission "Rescue Stranded Hai Naturalists Ambush"
+	invisible
+	to offer
+		"hai_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 2
+
+mission "Recovery Military Hai Asset Ambush"
+	invisible
+	to offer
+		"hai_military_asset_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 3
+		fleet "Large Unfettered" 2
+
+mission "Rescue Military Hai Agents Ambush"
+	invisible
+	to offer
+		"hai_military_rescue_ambush_1_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 3
+		fleet "Large Unfettered" 2
+
+mission "Recovery Endgame Hai Core Ambush"
+	invisible
+	to offer
+		"hai_endgame_asset_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 3
+		fleet "Large Unfettered" 2
+		fleet "Unfettered Raid" 1
+
+mission "Rescue Endgame Hai Agents Ambush"
+	invisible
+	to offer
+		"hai_endgame_rescue_ambush_ready" == 1
+	deadline 1
+	npc
+		government "Unfettered"
+		personality "hunting"
+		fleet "Small Unfettered" 3
+		fleet "Large Unfettered" 2
+		fleet "Unfettered Raid" 1

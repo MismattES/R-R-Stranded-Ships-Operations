@@ -12,7 +12,7 @@ mission "R&R Operations Introduction"
 		conversation
 			branch "branch_a"
 				"rr_intro_offered" == 0
-				"rr_intro_failed_once" == 1
+				"rr_intro_failed" == 1
 			branch "branch_b"
 				"rr_intro_offered" == -1
 			"Hey, my name is Dana. I am a member of an organization that deals in recovering things. What do you think about doing a little retrieval in Eteron?"
@@ -52,6 +52,7 @@ mission "R&R Operations Introduction"
 	on fail
 		conversation
 			"Dana looks at you with an annoyed face and informs you that you still need to get more experience before getting another shot. You feel a rush of shame watching her go away."
+		"rr_intro_failed" = 1
 		"rr_intro_cooldown" = day + 30
 		"reputation: R&R Stranded Ships Operations" -= 0.15
 

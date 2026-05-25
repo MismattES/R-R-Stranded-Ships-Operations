@@ -1,0 +1,128 @@
+# --- Remnant Arc ---
+
+# --- Remnant Arc Pt 1 ---
+
+mission "R&R: Southeast Scout Silence"
+	name "Investigate Silent Scout in Nenia"
+	description "Dana has contracted you to travel to the Nenia system in the southeast to investigate a missing R&R scout vessel and salvage any remaining data or hardware."
+	source "Ada"
+	destination "Ada"
+	waypoint 
+		system "Nenia"
+	
+	to offer
+		has "event: fw pug 1"
+		"rr_giants_data_completed" == 1
+		
+	on offer
+		conversation
+			"Dana meets you in a private corner of the R&R lounge, looking uncharacteristically tired."
+			"'Captain, we have a problem. We’ve been picking up signals of highly advanced, unusual ship signatures in the far southeast. We sent a scout—fitted with a prototype jump drive we... acquired—to investigate."
+			"That scout hasn't checked in for weeks. You’re one of the only people I trust with this level of classified intel. The last transmission came from the Nenia system. Find out what happened to our crew, and bring back anything you can salvage.'"
+			choice
+				"I'll head to Nenia immediately."
+					accept
+				"I can't do it now"
+					decline
+					
+	on accept
+		"rr_remnant_mission_started" = 1
+
+	npc
+		system "Nenia"
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Scout" "R&R Scout Wreck"
+		on assist
+			"rr_remnant_drone_recovered" = 1
+			conversation
+				"You arrive at the coordinates. The scout ship is a twisted wreck, floating in the void. There are no signs of the crew, but a heavily encrypted R&R black-box drone is still attached to the sensor array. You bring it aboard, but the data is locked behind an unfamiliar, highly advanced encryption layer."
+				
+	to complete
+		"rr_remnant_drone_recovered" == 1
+				
+	on complete
+		conversation
+			"You return to Ada and hand the drone over to Dana. She plugs it into an isolated terminal; the screen flickers with ship schematics that look like nothing in the known galaxy."
+			"'Look at these designs,' she whispers. 'They aren't human. They aren't even modern. This is something else entirely. You’ve just opened a door that won't be closed, Captain.'"
+		payment 7500000
+		"rr_operations_jobs_done" ++
+		"rr_remnant_unlocked" = 1
+		"rr_remnant_mission_started" = 0
+
+# --- Remnant Arc Pt 2 ---
+
+mission "R&R: Ember Waste Contact"
+	name "Contact Indigenous Races in Cardea"
+	description "Dana believes the missing scout crew is hidden in the Ember Wastes. Travel to the Cardea system, hail the planet Cartaegusa, and uncover the fate of our operatives."
+	source
+		planet "Ada"
+	destination
+		planet "Cartaegusa"
+	
+	to offer
+		"rr_remnant_unlocked" == 1
+		"rr_remnant_contacted" == 0
+		
+	on offer
+		conversation
+			"Dana pulls up a star chart of the Ember Wastes. 'Our scans of that drone you recovered were inconclusive, but the encryption was definitely local to that region. If our crew is alive, they are deep in the Waste."
+			"I need you to return to Cardea. You’ll need to hail the local authorities at Cartaegusa before you attempt a landing—they don't take kindly to unannounced arrivals. Find out what happened to our scouts, Captain.'"
+			choice
+				"I'll establish contact."
+					accept
+
+mission "R&R: Hail Cartaegusa"
+	invisible
+	source 
+		system "Cardea"
+	
+	to offer
+		has "mission: R&R: Ember Waste Contact"
+		"rr_cartaegusa_clearance" == 0
+		
+	on offer
+		conversation
+			"You drop out of hyperspace and immediately broadcast an open R&R diplomatic hail toward Cartaegusa. The signal is intercepted, and a heavily modulated, distinctly human voice responds. "
+			"'Your presence is noted, outsider. We are currently defending against active raider incursions, but your transponder matches the operatives we currently hold. You are granted temporary clearance for Cartaegusa only. Do not deviate from the approach vector, or our defense grids will fire.'"
+		"rr_cartaegusa_clearance" = 1
+
+	on complete
+		conversation
+			"You touch down on Cartaegusa. Heavily armed local security forces immediately confine you to your ship's hangar. A port official in utilitarian armor approaches. 'Your R&R colleagues are alive, but they are a liability. We do not release assets to unknown variables who might lead the mainland governments back to our doorstep."
+			"You must prove your capability to the Remnant before we will deal with you.'"
+		"rr_remnant_contacted" = 1
+
+# --- Remnant Arc Pt 3 ---
+
+mission "R&R: Remnant Rescue"
+	name "Extract R&R Crew from Cartaegusa"
+	description "Return the rescued R&R scout crew to R&R Headquarters on Ada."
+	source
+		planet "Cartaegusa"
+	destination
+		planet "Ada"
+	passengers 5
+	
+	to offer
+		"rr_remnant_contacted" == 1
+		has "event: Remnant Blood Test"
+		"rr_remnant_crew_extracted" == 0
+		
+	on offer
+		conversation
+			"As you return to the spaceport terminal, you are met by a Remnant security detail escorting the missing R&R scout crew. They look battered, but alive."
+			"The lead Remnant officer addresses you. 'The Korath targeted your operatives. We repelled the raiders and secured your crew. By passing the Blood Test, you have shown you can handle the dangers of the Waste."
+			"They are your responsibility now. Take them, and try not to draw the raiders' attention on your way out. Your vessel is cleared for unrestricted travel through our systems.'"
+		
+	on accept
+		"rr_remnant_full_clearance" = 1
+		"rr_remnant_crew_extracted" = 1
+		
+	on complete
+		conversation
+			"Back on Ada, Dana watches as the scouts are wheeled into medical transport. She exhales a breath she seems to have been holding for weeks."
+			"'You did it. R&R is a cold organization, Captain, but even we have people we'd rather not lose. You’ve done us a service that credits can't measure. Welcome back to the fold.'"
+		payment 1500000
+		"rr_operations_jobs_done" ++
+		"rr_remnant_jobs_unlocked" = 1

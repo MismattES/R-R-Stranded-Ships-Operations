@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Deep Asset"
 	name "Secure Deep Security Sensor Core in <destination>"
-	description "Deep Security Intelligence requires a discreet captain to recover a classified black-box data tape weighting <cargo> tons from a wrecked vessel in the <destination> system. Drop the drive off at the local spaceport there. Be advised that anti-tamper security grids may be active. Payment for successful extraction is 45,000 credits."
+	description "Deep Security Intelligence requires a discreet captain to recover a classified black-box data tape weighting <cargo> from a wrecked vessel in the <destination>. Drop the drive off at the local spaceport there. Be advised that anti-tamper security grids may be active. Payment for successful extraction is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -25,7 +25,7 @@ mission "Recovery Standard Deep Asset"
 		on assist
 			"deep_asset_ambush_1_ready" = 1
 			conversation
-				"Your system techs cut into the primary command node, pulling the black-box data tape. The tech reports the telemetry log is secured, but the drone's anti-tamper security grid has spiked the battery cells and it is going up."
+				"Your system techs cut into the primary command node, pulling the black-box data tape. The tech reports the telemetry log is secured, but the ship's anti-tamper security grid has spiked the battery cells and it is going up."
 	on complete
 		conversation
 			"The moment your landing gear locks at the spaceport, a squad of Deep Security operatives in unmarked armor boards your ship. They secure the black-box data tape in absolute silence, hand you a certified cred-stick, and depart just as quickly. A text-only message appears on your console: 'Extraction successful. Your discretion is valued, Captain.'"
@@ -46,7 +46,7 @@ mission "Recovery Standard Deep Asset"
 
 mission "Rescue Stranded Deep Security Agents"
 	name "Rescue Stranded Deep Agents in <destination>"
-	description "Deep Security requires an immediate, silent extraction of undercover agents stranded aboard a classified wreck in the <destination> system. Drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "Deep Security requires an immediate, silent extraction of <passengers> undercover agents stranded aboard a classified wreck in the <destination>. Drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -64,12 +64,11 @@ mission "Rescue Stranded Deep Security Agents"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Headhunter" "Classified Deep Wreck"
+		ship "Bounder" "Classified Deep Wreck"
 		on assist
 			"deep_rescue_ambush_1_ready" = 1
 			conversation
 				"Agents silently file through the airlock into your bunks. The lead agent quietly commands an emergency burn because the wreck's anti-tamper explosives are primed."
-
 	on complete
 		conversation
 			"You touch down at the spaceport under a heavily encrypted flight path. The rescued agents don't say a word as they disembark into a waiting armored transport. Moments later, your console chimes with a secure transfer and a brief audio file from a handler: 'Assets secured. Deep Security remembers those who keep our people out of the dark.'"
@@ -91,7 +90,7 @@ mission "Rescue Stranded Deep Security Agents"
 # Mid ones
 mission "Recovery Military Deep Security Asset"
 	name "Retrieve Deep Security Black Box in <destination>"
-	description "A Deep Observer has been destroyed in the <destination> system. You are contracted to rip the hidden terminal weighting <cargo> tons from its command console before pirate interception fleets arrive. Secure it at the local spaceport there. Payment for securing this military intelligence is 100,000 credits."
+	description "A Deep Observer has been disabled in the <destination>. You are contracted to rip the hidden terminal weighting <cargo> from its command console before pirate interception fleets arrive. Secure it at the local spaceport there. Payment for securing this military intelligence is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -109,16 +108,16 @@ mission "Recovery Military Deep Security Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Destroyed Deep Observer"
+		ship "Clipper" "Destroyed Deep Observer"
 		on assist
 			"deep_military_asset_ambush_1_ready" = 1
 			conversation
 				"Your boarding party rips the hidden terminal out of the dead vessel's command console. The officer reports the manifest is secured, but the tamper protocols have initiated a localized self-destruct and a pirate intercept fleet is breaking from hyperspace."
-
 	on complete
 		conversation
 			"Before the docking clamps even fully engage, Deep Intelligence officers sweep your cargo hold, securing the military terminal and aggressively scrubbing your ship's local access logs. A handler's voice crackles over a secure channel. 'Clean extraction, pilot. The data on that terminal just shifted the balance of power in this sector. You've earned this payout.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Deep Security" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -135,7 +134,7 @@ mission "Recovery Military Deep Security Asset"
 
 mission "Rescue Military Deep Security Agents"
 	name "Secure Deep Security Fleet Core in <destination>"
-	description "Commanders carrying unlisted Deep Security insignia require emergency extraction from a classified Vanguard wreck in the <destination> system. Total radio silence is mandated. Transport them to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
+	description "<passengers> Commanders carrying unlisted Deep Security insignia require emergency extraction from a classified Vanguard wreck in the <destination>. Total radio silence is mandated. Transport them to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -153,16 +152,16 @@ mission "Rescue Military Deep Security Agents"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Classified Deep Vanguard Wreck"
+		ship "Mule" "Classified Deep Vanguard Wreck"
 		on assist
 			"deep_military_rescue_ambush_1_ready" = 1
 			conversation
 				"Commanders wearing unlisted insignia breach into your ship. The agent snaps to lock down all outgoing system comms as an aggressive interception fleet has just matched your local beacon coordinates."
-
 	on complete
 		conversation
 			"You ease into a private docking pad heavily cordoned off by unmarked military transports. The unlisted commanders disembark, offering you a brief, stiff salute before disappearing into the shadows. Your terminal lights up with a massive credit transfer and a terse note: 'Command structure preserved. Exceptional work under fire, Captain.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Deep Security" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -180,7 +179,7 @@ mission "Rescue Military Deep Security Agents"
 # Hard ones
 mission "Recovery Endgame Deep Security Core"
 	name "CRITICAL: Salvage Deep Security Singularity Core in <destination>"
-	description "CRITICAL CONTRACT: Extract a dangerously unstable singularity mechanism weighting <cargo> tons from a ruined Deep Security fortress in the <destination> system. The derelict's gravity containment is collapsing, and heavy raider warships are tracking the beacon. Deliver it to the local spaceport there. Failure will result in severe license penalties. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Extract a dangerously unstable singularity mechanism weighting <cargo> from a ruined Deep Security fortress in the <destination>. The derelict's gravity containment is collapsing, and heavy raider warships are tracking the beacon. Deliver it to the local spaceport there. Failure will result in severe license penalties. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -199,16 +198,16 @@ mission "Recovery Endgame Deep Security Core"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Ruined Deep Security Fortress"
+		ship "Bactrian" "Ruined Deep Security Fortress"
 		on assist
 			"deep_endgame_asset_ambush_ready" = 1
 			conversation
 				"Your specialist crew extracts the dangerously unstable singularity mechanism. The chief yells that the core is secured but the gravity containment field is collapsing on the derelict, urging you to disengage as heavy raider warships and swarms of fast interceptors are dropping directly out of hyperspace on your coordinate tracks."
-
 	on complete
 		conversation
 			"The tension on your ship breaks only when heavily armed Deep operatives swarm your hold, locking the unstable singularity core into a heavy stasis-field container. A high-ranking Intelligence Director personally oversees the transfer. 'You just handed us the keys to this sector, Captain,' they say, their voice cold but approving. 'Consider your standing with us solidified.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Deep Security" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
@@ -227,7 +226,7 @@ mission "Recovery Endgame Deep Security Core"
 
 mission "Rescue Endgame Deep Security Agents"
 	name "CRITICAL: Evacuate Deep Intelligence Directors in <destination>"
-	description "CRITICAL CONTRACT: A Deep Security black-site in the <destination> system has been compromised. You must evacuate top-tier Intelligence Directors under heavy fire to the local spaceport there. Losing these assets will result in a kill order on your file. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A Deep Security black-site in the <destination> system has been compromised. You must evacuate <passengers> top-tier Intelligence Directors under heavy fire to the local spaceport there. Losing these assets will result in a kill order on your file. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -246,16 +245,16 @@ mission "Rescue Endgame Deep Security Agents"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Ruined Deep Security Fortress"
+		ship "Auxiliary" "Ruined Deep Security Fortress"
 		on assist
 			"deep_endgame_rescue_ambush_ready" = 1
 			conversation
 				"The airlock mechanisms are overridden as silent heavily armored agents pour onto your decks. A director states coldly to break orbit as the black-site is compromised and hostiles are tracking your beacon."
-
 	on complete
 		conversation
 			"You navigate to the spaceport under extreme radio silence. As the black-site Directors disembark into a secure bunker, the senior officer turns back. 'The intelligence in our heads is worth more than most planets, pilot. You didn't blink when the heat came down. Deep Security will not forget this level of competence.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Deep Security" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15

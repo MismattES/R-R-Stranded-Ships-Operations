@@ -1,0 +1,99 @@
+# --- Pug & Quarg jobs unlock ---
+
+mission "R&R: Deep Data Summons"
+	invisible
+	to offer
+		has "event: pug flee"
+		"rr_hai_jobs_done" >= 10
+		"rr_pug_quarg_summons" == 0
+		
+	on offer
+		conversation
+			"A highly classified, eyes-only transmission appears on your secure R&R channel. It's from Dana. 'Captain, I need you on Ada immediately. We are facing an unprecedented shift in galactic power, and the Board needs answers. Come alone.'"
+		"rr_pug_quarg_summons" = 1
+		
+	destination "Ada"
+	name "Report to R&R HQ on Ada"
+	description "Dana has sent an urgent, encrypted ping. Meet her on Ada for a highly classified briefing."
+	
+	on complete
+		"rr_pug_quarg_ready" = 1
+
+mission "R&R: The Giants' Data"
+	name "CRITICAL: Scan Pug and Quarg Nodes"
+	description "Travel to the Pug Iyik and Hevru Hai systems. Get close and perform a deep-scan on the designated Data Nodes in each system to gather tactical telemetry. Return to Ada. WARNING: The Quarg are highly aggressive against espionage."
+	source "Ada"
+	destination "Ada"
+	
+	to offer
+		"rr_pug_quarg_ready" == 1
+		
+	on offer
+		conversation
+			"Dana meets you in a subterranean bunker beneath the R&R Headquarters. The holographic map table is focused entirely on the newly opened wormhole in Deneb."
+			"'You saw what happened out there,' she begins grimly. 'The Pug nearly obliterated human fleets before retreating back into their own space. This is outside our usual recovery operations, but the Board of Directors is terrified they will return. We need data on their true capabilities.'"
+			"She highlights two systems on the map. 'The Quarg are the only known species to have fought the Pug and won. We need you to go to Pug Iyik and Hevru Hai. We've detected automated archival nodes in both systems.'"
+			"Dana looks you dead in the eye. 'You need to stay close to them and run a deep-scan. It will take time. The Quarg monitor their networks aggressively. If they catch you, they will vaporize you. The payout is 5,000,000 credits. Are you willing to take the risk?'"
+			choice
+				"I'll get the data. Lock the coordinates."
+					accept
+				"That's suicide. I'm out."
+					decline
+					
+	on accept
+		"rr_pug_quarg_ready" = 0
+
+	# Objective 1: Pug System
+	npc "scan outfits"
+		system "Pug Iyik"
+		government "Pug"
+		ship "Pug Cormorant" "Pug Archival Node"
+		personality "staying"
+		conversation
+			"Your tactical computers chew through the alien encryption. The scan completes, and you successfully download a massive cache of Pug tactical telemetry. Suddenly, multiple hostile Pug signatures drop out of hyperspace to intercept you!"
+
+	# Pug Ambush
+	npc
+		system "Pug Iyik"
+		government "Pug"
+		personality "nemesis" "waiting"
+		ship "Pug Harrier" 2 4
+
+	# Objective 2: Quarg System
+	npc "scan outfits"
+		system "Hevru Hai"
+		government "Quarg"
+		ship "Quarg Skylark" "Quarg Archival Node"
+		personality "staying"
+		conversation
+			"You initiate the deep-scan on the Quarg ringworld network. The progress bar crawls... 10 seconds... 15 seconds..."
+			"At exactly 19 seconds into the transfer, your console screams with a master-level alarm. The Quarg have detected your intrusion! Their planetary defense grids are locking onto your ship. The data is secured — GET OUT OF THE SYSTEM NOW!"
+
+	# Quarg Ambush
+	npc
+		system "Hevru Hai"
+		government "Quarg"
+		personality "nemesis" "waiting"
+		ship "Quarg Ward Dragon" 1 2
+			
+	on complete
+		conversation
+			"You slam your ship onto the landing pad at Ada, your hull still radiating heat from your frantic hyperspace jumps. Dana runs out to meet you, looking incredibly relieved."
+			"'You actually made it back,' she breathes, taking the data drive from your trembling hands. 'I've already deployed a massive counter-virus to wipe your ship's transponder signature from the Quarg network. They won't be able to track you anymore.'"
+			"She smiles, a look of profound gratitude on her face. 'You took an incredible risk for us today, Captain. This data might just save humanity. Your payment has been transferred.'"
+		payment 5000000
+		"rr_operations_jobs_done" ++
+		"rr_giants_jobs_completed" ++
+		"rr_giants_data_completed" = 1
+		"reputation: R&R Stranded Ships Operations" += 0.50
+		"reputation: Quarg" = 0
+		
+	on fail
+		conversation
+			"Dana stares at the floor of the bunker. 'The greatest intelligence opportunity of our lifetime, lost. The Board is going to be furious, Captain.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		
+	on abort
+		conversation
+			"Dana's face hardens into a mask of pure disgust. 'You aborted the single most important contract in R&R history. Get out of my sight.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.60

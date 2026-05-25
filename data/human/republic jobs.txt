@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Republic Asset"
 	name "Recover Republic Railgun Prototype in <destination>"
-	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> system and extract its dense magnetic rails weighting <cargo> tons. Drop the prototype off at the local spaceport there. Payment for returning the prototype is 45,000 credits."
+	description "The Republic Navy has contracted you to cut open the forward weapon bay of a stranded vessel in the <destination> and extract its dense magnetic rails weighting <cargo>. Drop the prototype off at the local spaceport there. Payment for returning the prototype is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -21,7 +21,7 @@ mission "Recovery Standard Republic Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Headhunter" "Stranded Navy Vessel"
+		ship "Scout" "Stranded Navy Vessel"
 		on assist
 			"rep_asset_ambush_1_ready" = 1
 			conversation
@@ -47,7 +47,7 @@ mission "Recovery Standard Republic Asset"
 
 mission "Rescue Stranded Republic Soldiers"
 	name "Rescue Stranded Republic Crew in <destination>"
-	description "A Republic Navy vessel is stranded in the <destination> system. You are to extract the crew and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A Republic Navy vessel is stranded in the <destination>. You are to extract the crew of <passengers> and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -65,7 +65,7 @@ mission "Rescue Stranded Republic Soldiers"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Headhunter" "Stranded Navy Vessel"
+		ship "Bounder" "Stranded Navy Vessel"
 		on assist
 			"rep_rescue_ambush_1_ready" = 1
 			conversation
@@ -92,7 +92,7 @@ mission "Rescue Stranded Republic Soldiers"
 # Mid ones
 mission "Recovery Military Republic Asset"
 	name "Retrieve Republic Routing Matrix in <destination>"
-	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> tons from a battered fleet hull in the <destination> system. Secure it at the local spaceport there. Payment for securing this military comm hub is 100,000 credits."
+	description "Republic Fleet engineers require the heavy tactical routing matrix weighting <cargo> from a battered fleet hull in the <destination>. Secure it at the local spaceport there. Payment for securing this military comm hub is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -110,7 +110,7 @@ mission "Recovery Military Republic Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Battered Fleet Hull"
+		ship "Hauler II" "Battered Fleet Hull"
 		on assist
 			"rep_asset_ambush_2_ready" = 1
 			conversation
@@ -120,6 +120,7 @@ mission "Recovery Military Republic Asset"
 		conversation
 			"You land safely at the spaceport, immediately flanked by heavily armed Republic Fleet engineers who secure the tactical routing matrix. A Navy Commander logs the asset's recovery on his datapad. 'This comm hub is vital to our sector routing, pilot. You held your nerve against hostiles and delivered. The Republic commends your service.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Republic" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -136,7 +137,7 @@ mission "Recovery Military Republic Asset"
 
 mission "Rescue Military Republic Soldiers"
 	name "Extract Republic Infantry from <destination>"
-	description "A platoon of Republic heavy infantry is trapped aboard a battered fleet hull in the <destination> system. You are tasked with their immediate evacuation to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
+	description "A platoon of <passengers> Republic heavy infantry is trapped aboard a battered fleet hull in the <destination>. You are tasked with their immediate evacuation to the local spaceport there. Payment for this mid-tier extraction is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -154,7 +155,7 @@ mission "Rescue Military Republic Soldiers"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Battered Fleet Hull"
+		ship "Frigate" "Battered Fleet Hull"
 		on assist
 			"rep_rescue_ambush_2_ready" = 1
 			conversation
@@ -164,6 +165,7 @@ mission "Rescue Military Republic Soldiers"
 		conversation
 			"You set down at the spaceport, and the platoon of Republic heavy infantry disembarks, their heavy boots echoing on the tarmac. The platoon sergeant turns to you before boarding their transport. 'We were sitting ducks out there. You executed a flawless extraction under pressure. The Navy owes you a debt, Captain.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Republic" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -181,7 +183,7 @@ mission "Rescue Military Republic Soldiers"
 # Hard ones
 mission "Recovery Endgame Republic Core"
 	name "CRITICAL: Extract Republic Antimatter Engine from <destination>"
-	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> tons from a burning Fleet Flagship in the <destination> system. Deliver it to the local spaceport there. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Use plasma-cutting frames to extract a massive, humming antimatter engine core weighting <cargo> from a burning Fleet Flagship in the <destination>. Deliver it to the local spaceport there. Discretion and combat efficiency are mandatory. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -200,7 +202,7 @@ mission "Recovery Endgame Republic Core"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Burning Fleet Flagship"
+		ship "Container Transport" "Burning Fleet Flagship"
 		on assist
 			"rep_endgame_asset_ambush_ready" = 1
 			conversation
@@ -210,6 +212,7 @@ mission "Recovery Endgame Republic Core"
 		conversation
 			"You carefully touch down at the spaceport, engines whining from the strain. Republic Fleet engineers in hazard suits quickly swarm the hold, securing the humming antimatter core. A high-ranking Admiral contacts you directly. 'Securing that core denied our enemies a massive tactical advantage. Your operational excellence has been permanently noted by the Navy brass.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Republic" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
@@ -229,7 +232,7 @@ mission "Recovery Endgame Republic Core"
 
 mission "Rescue Endgame Republic Soldiers"
 	name "CRITICAL: Evacuate Fleet Command Staff from <destination>"
-	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination> system. You must evacuate hundreds of highly valuable Fleet Command staff under heavy enemy fire to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A catastrophic stress event has crippled a Republic Fleet Flagship in the <destination>. You must evacuate <passengers> of highly valuable Fleet Command staff under heavy enemy fire to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -248,7 +251,7 @@ mission "Rescue Endgame Republic Soldiers"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Burning Fleet Flagship"
+		ship "Carrier" "Burning Fleet Flagship"
 		on assist
 			"rep_endgame_rescue_ambush_ready" = 1
 			conversation
@@ -258,6 +261,7 @@ mission "Rescue Endgame Republic Soldiers"
 		conversation
 			"You safely navigate down to the spaceport, greeted by a massive security cordon. As the Fleet Command staff are escorted to safety, an Admiral approaches your cockpit. 'You navigated a catastrophic event and saved the minds that run this fleet, Captain. Your name is now at the absolute top of our list for high-priority contracts.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Republic" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15

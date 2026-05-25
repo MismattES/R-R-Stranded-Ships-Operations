@@ -1,0 +1,123 @@
+# --- Remnant Arc Jobs ---
+
+# Job 1: Tech Recovery (Korath Bait)
+mission "R&R Job: Remnant Tech Recovery"
+	name "Recover Sensitive Hardware in <system>"
+	description "A Remnant scavenger was disabled by Korath raiders in <system>. Travel there, board the wreck to recover the experimental tech, and return it to <origin>. WARNING: The Exiles are known to leave disabled ships intact to use as bait."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		government "Remnant"
+	destination "\<origin\>"
+	waypoint
+		distance 4 8
+		
+	to offer
+		"rr_remnant_jobs_unlocked" == 1
+		
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Albatross" "Wrecked Scavenger"
+		on board
+			"remnant_tech" = 1
+			conversation
+				"You force the airlock open. The interior of the Albatross is exposed to the vacuum, its bulkheads scarred by Korath plasma burns. You locate the secure cargo hold and extract the experimental hardware crates just as your tactical display lights up with multiple hostile contacts."
+
+	# The Ambush: Spawns 1 to 3 hostile Korath Raiders that will actively hunt the player
+	npc
+		system waypoint
+		government "Korath Exiles"
+		personality "nemesis" "waiting"
+		ship "Korath Raider" 1 3
+		
+	to complete
+		"remnant_tech" == 1
+		
+	on complete
+		conversation
+			"The Remnant quartermaster takes the hardware crates without a word, inspecting the vacuum seals. 'Good. The raiders didn't get to it, and you survived the bait trap. You've proven highly capable, outsider. Here is your requisition payout.'"
+		payment 3500000
+		"rr_operations_jobs_done" ++
+		"rr_remnant_jobs_done" ++
+		"reputation: Remnant" += 0.20
+		"reputation: R&R Stranded Ships Operations" += 0.20
+		"remnant_tech" = 0
+		
+	on fail
+		conversation
+			"The Remnant quartermaster glares at you. 'That hardware has fallen into the hands of the Korath because of your failure. You are becoming a liability to our survival.'"
+		"reputation: Remnant" -= 0.50
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"remnant_tech" = 0
+		
+	on abort
+		conversation
+			"A Remnant communications officer coldly acknowledges your retreat. 'Fleeing while our technology is exposed to the Exiles? You mainlanders are as cowardly as you are useless.'"
+		"reputation: Remnant" -= 0.60
+		"reputation: R&R Stranded Ships Operations" -= 0.60
+		"remnant_tech" = 0
+
+
+# Job 2: Crew Rescue (Korath Ambush)
+mission "R&R Job: Remnant Crew Rescue"
+	name "Rescue Stranded Crew in <system>"
+	description "A Remnant patrol vessel was ambushed by Korath Exiles in <system>. Travel there, extract the surviving crew members from the derelict, and return them safely to <origin>. Proceed with extreme caution."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		government "Remnant"
+	destination "\<origin\>"
+	waypoint
+		distance 4 8
+		
+	to offer
+		"rr_remnant_jobs_unlocked" == 1
+		
+	npc
+		system waypoint
+		government "Derelict"
+		personality "derelict" "staying"
+		ship "Pelican" "Disabled Patrol"
+		on board
+			"remnant_crew" = 1
+			conversation
+				"You dock with the crippled Pelican. The surviving Remnant crew members are already in their void suits, heavily armed and waiting at the airlock."
+				"'Took you long enough,' their commander grunts, pushing past you into your ship. 'Break the seal and punch the drives! The Exiles are still hunting us!'"
+
+	# The Ambush: A larger strike force of 2 to 4 Korath Raiders
+	npc
+		system waypoint
+		government "Korath Exiles"
+		personality "nemesis" "waiting"
+		ship "Korath Raider" 2 4
+		
+	to complete
+		"remnant_crew" >= 1
+		
+	on complete
+		conversation
+			"The rescued Remnant operatives disembark efficiently, offering terse nods of acknowledgment. The local garrison commander transfers your payment immediately. 'You handled yourself well out there. The Korath are relentless, but we do not leave our people behind to be harvested. Your payment is authorized.'"
+		payment 4800000
+		"rr_operations_jobs_done" ++
+		"rr_remnant_jobs_done" ++
+		"reputation: Remnant" += 0.25
+		"reputation: R&R Stranded Ships Operations" += 0.25
+		"remnant_crew" = 0
+		
+	on fail
+		conversation
+			"The local garrison commander stares through you, their voice filled with quiet fury. 'Our operatives were taken by the Exiles. We trusted you with their lives, and you failed them.'"
+		"reputation: Remnant" -= 0.50
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"remnant_crew" = 0
+		
+	on abort
+		conversation
+			"Dana contacts you on a secure R&R channel, her voice laced with panic and anger. 'You abandoned Remnant personnel to the Korath?! They are threatening to lock our entire organization out of the Waste!'"
+		"reputation: Remnant" -= 0.60
+		"reputation: R&R Stranded Ships Operations" -= 0.60
+		"remnant_crew" = 0

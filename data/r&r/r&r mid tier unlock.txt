@@ -1,10 +1,12 @@
 mission "R&R Mid-Tier Invitation"
 	name "Freelancer Contract: Mid-Tier Qualification"
-	description "Dana is testing your capabilities. Act as the primary extraction unit for a hull stranded in the Regulus system. Be prepared for heavy hostile interception. Return to Ada to complete the contract and receive your clearance."
+	description "Dana is testing your capabilities. Act as the primary extraction unit for a crew of <passengers> stranded in the Regulus system. Be prepared for heavy hostile interception. Return to Ada to complete the contract and receive your clearance."
 	source
 		planet "Ada"
 	destination "Ada"
 	waypoint "Regulus"
+	deadline
+	passengers 20 40
 	to offer
 		"rr_mid_tier_unlocked" == 0
 		"rr_mid_tier_started" == 0

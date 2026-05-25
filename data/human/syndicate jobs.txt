@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Syndicate Asset"
 	name "Recover Syndicate Cybernetic Core from <destination>"
-	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> tons from a disabled asset in the <destination> system. Drop the core off at the local spaceport there. Payment for returning the cybernetic core is 45,000 credits."
+	description "Syndicate operatives require an independent contractor to break terminal locks and disconnect a liquid-cooled processing stack weighting <cargo> from a disabled asset in the <destination>. Drop the core off at the local spaceport there. Payment for returning the cybernetic core is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -21,7 +21,7 @@ mission "Recovery Standard Syndicate Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Headhunter" "Disabled Syndicate Asset"
+		ship "Clipper" "Disabled Syndicate Asset"
 		on assist
 			"syn_asset_ambush_1_ready" = 1
 			conversation
@@ -47,7 +47,7 @@ mission "Recovery Standard Syndicate Asset"
 
 mission "Rescue Stranded Syndicate Personnel"
 	name "Rescue Stranded Corporate Crew in <destination>"
-	description "A corporate transport has been disabled in the <destination> system. You are to retrieve the stranded corporate personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A corporate transport has been disabled in the <destination>. You are to retrieve the <passengers> stranded corporate personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -65,7 +65,7 @@ mission "Rescue Stranded Syndicate Personnel"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Headhunter" "Disabled Corporate Transport"
+		ship "Bounder" "Disabled Corporate Transport"
 		on assist
 			"syn_rescue_ambush_1_ready" = 1
 			conversation
@@ -92,7 +92,7 @@ mission "Rescue Stranded Syndicate Personnel"
 # Mid ones
 mission "Recovery Military Syndicate Asset"
 	name "Salvage Corporate Tech in <destination>"
-	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> tons from a scuttled Syndicate transport in the <destination> system. Secure it at the local spaceport there. Payment for salvaging this corporate tech is 100,000 credits."
+	description "A tech specialist is needed to crack a corporate safe and secure an encrypted drive weighting <cargo> from a scuttled Syndicate transport in the <destination>. Secure it at the local spaceport there. Payment for salvaging this corporate tech is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -110,7 +110,7 @@ mission "Recovery Military Syndicate Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Scuttled Syndicate Transport"
+		ship "Hauler" "Scuttled Syndicate Transport"
 		on assist
 			"syn_military_asset_ambush_1_ready" = 1
 			conversation
@@ -120,6 +120,7 @@ mission "Recovery Military Syndicate Asset"
 		conversation
 			"You land safely at the local spaceport. A Syndicate black-suit detail steps onto your ship, verifies the serial numbers on the encrypted drive, and locks it in a biometric case. A corporate executive's voice echoes from their datapad. 'Excellent work cracking that safe, contractor. The data on that drive is worth ten times your fee, but your cut is guaranteed.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Syndicate" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -136,7 +137,7 @@ mission "Recovery Military Syndicate Asset"
 
 mission "Rescue Military Syndicate Operators"
 	name "Secure Syndicate Black-Ops Asset in <destination>"
-	description "A team of uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination> system. Transport them to the local spaceport there. Payment for securing this black-ops asset is 100,000 credits."
+	description "A team of <passengers> uniformed paramilitary contractors needs immediate extraction from a classified Syndicate capital wreck in the <destination>. Transport them to the local spaceport there. Payment for securing this black-ops asset is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -154,7 +155,7 @@ mission "Rescue Military Syndicate Operators"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Falcon" "Classified Syndicate Capital Wreck"
+		ship "Bastion" "Classified Syndicate Capital Wreck"
 		on assist
 			"syn_military_rescue_ambush_1_ready" = 1
 			conversation
@@ -164,6 +165,7 @@ mission "Rescue Military Syndicate Operators"
 		conversation
 			"You touch down at the spaceport, and the paramilitary contractors disembark in chilling synchronization, melting into the shadows of the hangar. Your console lights up with an untraceable credit transfer and an encrypted message from the Syndicate security chief: 'Black-ops team secured. Your discretion has earned you a place on our shortlist.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Syndicate" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -181,7 +183,7 @@ mission "Rescue Military Syndicate Operators"
 # Hard ones
 mission "Recovery Endgame Syndicate Tech"
 	name "CRITICAL: Salvage Syndicate AI Logic Core in <destination>"
-	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm aboard a ruined corporate super-freighter in the <destination> system. Deliver it to the local spaceport there. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Override the cryogenic locks on a server farm weighting <cargo> aboard a ruined corporate super-freighter in the <destination>. Deliver it to the local spaceport there. The Syndicate expects flawless execution and for you to ask no questions regarding the AI Logic Core. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -200,7 +202,7 @@ mission "Recovery Endgame Syndicate Tech"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Ruined Corporate Super-Freighter"
+		ship "Hauler II" "Ruined Corporate Super-Freighter"
 		on assist
 			"syn_endgame_asset_ambush_ready" = 1
 			conversation
@@ -210,6 +212,7 @@ mission "Recovery Endgame Syndicate Tech"
 		conversation
 			"You safely navigate down to the spaceport, greeted by a phalanx of corporate executives supervising the extraction of the server farm. A senior supervisor hands you a hefty cred-stick. 'Flawless execution under heavy fire,' he notes, eyes gleaming. 'The Syndicate appreciates assets who deliver priceless tech without asking dangerous questions.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Syndicate" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
@@ -229,7 +232,7 @@ mission "Recovery Endgame Syndicate Tech"
 
 mission "Rescue Endgame Syndicate Operators"
 	name "CRITICAL: Evacuate Corporate Executives in <destination>"
-	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> system holds a crew of panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them to the local spaceport there before rival elements arrive. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A ruined corporate super-freighter in the <destination> holds a crew of <passengers> panicked Syndicate executives. You are to salvage this delicate political situation by evacuating them to the local spaceport there before rival elements arrive. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -248,7 +251,7 @@ mission "Rescue Endgame Syndicate Operators"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Ruined Corporate Super-Freighter"
+		ship "Star Queen" "Ruined Corporate Super-Freighter"
 		on assist
 			"syn_endgame_rescue_ambush_ready" = 1
 			conversation
@@ -258,6 +261,7 @@ mission "Rescue Endgame Syndicate Operators"
 		conversation
 			"You safely navigate down to the spaceport. A heavy security escort aggressively sweeps the hangar as the corporate executives disembark, adjusting their ties. A senior handler intercepts you with a satisfied smile. 'You've salvaged a very delicate political situation today, Captain. The Board of Directors is personally aware of your intervention. Your standing has increased significantly.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Syndicate" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15

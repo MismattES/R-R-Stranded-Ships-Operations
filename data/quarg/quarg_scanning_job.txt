@@ -1,0 +1,54 @@
+# Quarg Telemetry Job
+mission "R&R Job: Quarg Telemetry"
+	name "CRITICAL: Deep-Scan Quarg Node"
+	description "R&R needs updated data on Quarg defensive capabilities. Travel to Hevru Hai, scan the Quarg Archival Node, and survive the immediate retaliation. Return to Ada for your payout."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		planet "Ada"
+	destination
+		planet "Ada"
+	waypoint
+		system "Hevru Hai"
+		
+	to offer
+		"rr_giants_data_done" == 1
+		"giants_job_cooldown" <= day
+		
+	npc "scan outfits"
+		system "Hevru Hai"
+		government "Quarg"
+		personality "staying"
+		ship "Quarg Skylark" "Quarg Archival Node"
+		conversation
+			"The deep-scan hits 19 seconds... and the master-alarms scream. The Quarg have detected your intrusion! Jump out of the system immediately!"
+
+	# The Ambush: A Quarg strike force drops in to hunt the player
+	npc
+		system "Hevru Hai"
+		government "Quarg"
+		personality "nemesis" "waiting"
+		ship "Quarg Ward Dragon" 1 2
+			
+	on complete
+		conversation
+			"Dana is waiting as you land, already uploading the transponder-wiping counter-virus to your ship's mainframe. 'Another close call with the Giants,' she says, taking the data. 'Transponder scrubbed. The Quarg won't remember your ship. You've earned every credit of this.'"
+		payment 2500000
+		"rr_operations_jobs_done" ++
+		"rr_giants_job_completed" ++
+		"reputation: R&R Stranded Ships Operations" += 0.10
+		"reputation: Quarg" = 0
+		"giants_job_cooldown" = day + 15
+		
+	on fail
+		conversation
+			"Dana looks furious. 'You failed the Quarg scan and triggered their alarms for nothing. This sets our intelligence gathering back by months.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"giants_job_cooldown" = day + 30
+		
+	on abort
+		conversation
+			"Dana's voice is freezing cold. 'Aborting a Tier-1 telemetry mission against the Quarg? If you weren't ready, you never should have accepted. Do not waste my time again.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.60
+		"giants_job_cooldown" = day + 30

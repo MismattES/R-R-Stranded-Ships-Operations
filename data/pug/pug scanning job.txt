@@ -1,0 +1,52 @@
+mission "R&R Job: Pug Telemetry"
+	name "Deep-Scan Pug Archival Node"
+	description "The Board requires fresh telemetry on Pug fleet movements. Travel to Pug Iyik, locate the automated Archival Node, and deep-scan it. Return the data to Ada for your payout."
+	job
+	repeat
+	"offer precedence" 1000
+	source
+		planet "Ada"
+	destination
+		planet "Ada"
+	waypoint
+		system "Pug Iyik"
+		
+	to offer
+		"rr_giants_data_done" == 1
+		"giants_job_cooldown" <= day
+		
+	npc "scan outfits"
+		system "Pug Iyik"
+		government "Pug"
+		personality "staying"
+		ship "Pug Cormorant" "Pug Archival Node"
+		conversation
+			"Your tactical computers slice through the Pug encryption, downloading the latest telemetry cache. The data is secured, but multiple hostile Pug signatures have just dropped out of hyperspace to intercept you!"
+
+	# The Ambush: A Pug strike force actively hunts the player
+	npc
+		system "Pug Iyik"
+		government "Pug"
+		personality "nemesis" "waiting"
+		ship "Pug Harrier" 2 4
+				
+	on complete
+		conversation
+			"Dana takes the drive from your hands. 'Excellent work, Captain. Keeping tabs on the Pug is the only way we are going to keep humanity alive. Here is your payout.'"
+		payment 1000000
+		"rr_operations_jobs_done" ++
+		"rr_giants_jobs_completed" ++
+		"reputation: R&R Stranded Ships Operations" += 0.05
+		"giants_job_cooldown" = day + 15
+		
+	on fail
+		conversation
+			"Dana's expression is grim. 'You failed to secure the Pug telemetry, and now they know we're trying to spy on them. This is a massive setback.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.50
+		"giants_job_cooldown" = day + 30
+		
+	on abort
+		conversation
+			"Dana slams her hand against her desk. 'Aborting a Tier-1 telemetry gathering mission? The Board relies on that data! You are becoming a liability, Captain.'"
+		"reputation: R&R Stranded Ships Operations" -= 0.60
+		"giants_job_cooldown" = day + 30

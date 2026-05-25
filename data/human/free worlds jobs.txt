@@ -3,7 +3,7 @@
 # Easy ones
 mission "Recovery Standard Free Worlds Asset"
 	name "Salvage Free Worlds Frontier Mineral Cache in <destination>"
-	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> tons from a battered frontier miner in the <destination> system. Drop the cache off at the local spaceport there. Payment is 45,000 credits."
+	description "Free Worlds quartermasters need a ship to salvage a dense containment crate weighting <cargo> from a battered frontier miner in the <destination>. Drop the cache off at the local spaceport there. Payment is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -22,7 +22,7 @@ mission "Recovery Standard Free Worlds Asset"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Bounder" "Battered Frontier Miner"
+		ship "Scout" "Battered Frontier Miner"
 		on assist
 			"fw_asset_ambush_1_ready" = 1
 			conversation
@@ -47,7 +47,7 @@ mission "Recovery Standard Free Worlds Asset"
 
 mission "Rescue Stranded Free Worlds Militia"
 	name "Rescue Stranded Militia in <destination>"
-	description "A Free Worlds militia scout has been crippled in the <destination> system. You are requested to extract the stranded personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
+	description "A Free Worlds militia scout has been crippled in the <destination>. You are requested to extract the <passengers> stranded personnel and drop them off safely at the local spaceport there. Payment for their safe return is 45,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -92,7 +92,7 @@ mission "Rescue Stranded Free Worlds Militia"
 # Mid ones
 mission "Recovery Military Free Worlds Asset"
 	name "Secure Free Worlds Fission Core in <destination>"
-	description "A Free Worlds blockade runner has sustained critical damage in the <destination> system. You are tasked with winching a glowing fission reactor part weighting <cargo> tons aboard before hostiles close in. Secure it at the local spaceport there. Payment for securing this military asset is 100,000 credits."
+	description "A Free Worlds blockade runner has sustained critical damage in the <destination>. You are tasked with winching a glowing fission reactor part weighting <cargo> aboard before hostiles close in. Secure it at the local spaceport there. Payment for securing this military asset is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -120,6 +120,7 @@ mission "Recovery Military Free Worlds Asset"
 		conversation
 			"You set down at the spaceport, and Free Worlds technicians immediately swarm your cargo hold with geiger counters and hazard gear. A militia officer hands over your payment. 'That reactor part is going straight into a blockade runner on the front lines. You didn't just salvage tech today; you kept the war effort alive.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Free Worlds" += 0.05
 		"reputation: R&R Stranded Ships Operations" += 0.05
 		payment 100000
@@ -136,7 +137,7 @@ mission "Recovery Military Free Worlds Asset"
 
 mission "Rescue Military Free Worlds Militia"
 	name "Extract Free Worlds Elite Guard from <destination>"
-	description "Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination> system. Transport them to the local spaceport there. Payment for rescuing this elite guard is 100,000 credits."
+	description "<passengers> Battle-worn Free Worlds soldiers carrying heavy tactical gear require immediate extraction from a crippled command hull in the <destination>. Transport them to the local spaceport there. Payment for rescuing this elite guard is 100,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -164,6 +165,7 @@ mission "Rescue Military Free Worlds Militia"
 		conversation
 			"You arrive at the local spaceport, and the battle-worn elite guardsmen disembark, their armor scored with plasma burns. The squad leader pauses at the airlock, giving you a firm, respectful nod. 'We thought we were drifting into an early grave out there. You fly a good ship, Captain. We'll make sure High Command knows it.'"
 		"rr_operations_jobs_done" ++
+		"rr_mid_tier_jobs_done" ++
 		"reputation: Free Worlds" += 0.05
 		payment 100000
 	on fail
@@ -180,7 +182,7 @@ mission "Rescue Military Free Worlds Militia"
 # Hard ones
 mission "Recovery Endgame Free Worlds Crystals"
 	name "CRITICAL: Salvage Free Worlds Plasma Cache in <destination>"
-	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> tons from a crippled dreadnought in the <destination> system. Deliver it to the local spaceport there. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 250,000 credits."
+	description "CRITICAL CONTRACT: Extract a massive, highly volatile crystal cache weighting <cargo> from a crippled dreadnought in the <destination>. Deliver it to the local spaceport there. Expect overwhelming pirate resistance. Payment for this endgame salvage operation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -199,7 +201,7 @@ mission "Recovery Endgame Free Worlds Crystals"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Crippled Free Worlds Dreadnought"
+		ship "Dreadnought" "Crippled Free Worlds Dreadnought"
 		on assist
 			"fw_endgame_asset_ambush_ready" = 1
 			conversation
@@ -209,6 +211,7 @@ mission "Recovery Endgame Free Worlds Crystals"
 		conversation
 			"You safely navigate down to the spaceport, where specialized Free Worlds hazard teams are waiting with heavy lifting rigs. As they carefully extract the highly volatile crystal cache, the local foreman shakes your hand vigorously. 'This plasma cache stabilizes the regional power grid for months, pilot. You didn't just salvage a wreck today; you kept the lights on for thousands.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Free Worlds" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15
@@ -228,7 +231,7 @@ mission "Recovery Endgame Free Worlds Crystals"
 
 mission "Rescue Endgame Free Worlds Militia"
 	name "CRITICAL: Evacuate Militia Generals in <destination>"
-	description "CRITICAL CONTRACT: A unit of wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination> system. Evacuate them to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
+	description "CRITICAL CONTRACT: A unit of <passengers> wounded, high-ranking militia generals are trapped aboard a crippled dreadnought in the <destination>. Evacuate them to the local spaceport there. Payment for this endgame evacuation is 250,000 credits."
 	job
 	repeat
 	"offer precedence" 1000
@@ -247,7 +250,7 @@ mission "Rescue Endgame Free Worlds Militia"
 		system destination
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Crippled Free Worlds Dreadnought"
+		ship "Dreadnought" "Crippled Free Worlds Dreadnought"
 		on assist
 			"fw_endgame_rescue_ambush_ready" = 1
 			conversation
@@ -257,6 +260,7 @@ mission "Rescue Endgame Free Worlds Militia"
 		conversation
 			"You safely navigate down to the local spaceport, instantly surrounded by rushing medical teams offloading the wounded generals. A heavily decorated Free Worlds Commander approaches you, saluting sharply. 'You flew into hell and brought back our best strategists, Captain. The Parliament itself will hear of your bravery today.'"
 		"rr_operations_jobs_done" ++
+		"rr_hard_tier_jobs_done" ++
 		"reputation: Free Worlds" += 0.15
 		"reputation: R&R Stranded Ships Operations" += 0.15
 		"your_mission_cooldown_date" = day + 15

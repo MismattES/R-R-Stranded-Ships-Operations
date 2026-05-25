@@ -1,6 +1,6 @@
 mission "R&R Hard-Tier Emergency"
 	name "Freelancer Contract: High-Security Clearance"
-	description "CRITICAL EMERGENCY: A prototype tech leak threatens to compromise the entire R&R infrastructure. Jump to the destination and secure a failing core aboard a burning Fleet Flagship. Return to the source planet to collect your reward."
+	description "CRITICAL EMERGENCY: A prototype tech leak, weighting <cargo> threatens to compromise the entire R&R infrastructure. Jump to the destination and secure a failing core aboard a burning Fleet Flagship. Return to the source planet to collect your reward."
 	source
 		not attributes "uninhabited"
 	destination
@@ -8,6 +8,7 @@ mission "R&R Hard-Tier Emergency"
 	waypoint
 		system "Ultima Thule"
 	deadline
+	cargo 100 150
 	to offer
 		"rr_hard_tier_unlocked" == 0
 		"rr_hard_cooldown" <= day
@@ -32,7 +33,7 @@ mission "R&R Hard-Tier Emergency"
 		system "Ultima Thule"
 		government "Derelict"
 		personality "derelict" "staying"
-		ship "Leviathan" "Burning Fleet Flagship"
+		ship "Bactrian" "Burning Fleet Flagship"
 		on assist
 			"rr_hard_tier_ambush_ready" = 1
 			conversation
